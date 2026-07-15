@@ -16,7 +16,7 @@ public class Laboratorio extends JPanel{
 
     public Laboratorio() {
         configurarPestaña();
-        
+        cargarComponentesLab();
     }
 
     public void configurarPestaña() {
@@ -68,5 +68,68 @@ public class Laboratorio extends JPanel{
         pCentro.add(panelRegistro);
         
         return pCentro;
+    }
+
+    public void cargarPaneLab(){
+        setLayout(new BorderLayout());
+
+    }
+    public void cargarComponentesLab(){
+        JSpinner spin; 
+        JSlider velodidad;
+        JButton aleatorio,ejecutar, manual;  
+        JComboBox combo; 
+        JRadioButton ordenamiento,busqueda; 
+        ButtonGroup grupo; 
+        JPanel superior,S1,S2,S3,S33,S4,medio1,medio2,inferior,izquierda,IzModo,IzAlgoritmo,Izdatos;
+        String[] busq; 
+        
+        //PRIMER PANEL(Panel de modos)
+        S1 =new JPanel(new GridLayout(3,1,10,10));
+        S1.setBorder(BorderFactory.createTitledBorder("Modo")); 
+            //Generando el grupo de botones
+                grupo = new ButtonGroup(); 
+                ordenamiento = new JRadioButton("Ordenamiento"); 
+                busqueda = new JRadioButton("Busqueda");
+                //agregando los botones al grupo
+                grupo.add(ordenamiento);
+                grupo.add(busqueda);
+            //creando combo de algoritmos de busqueda
+                
+                String[] ord = {"Selección", "Inserción", "Burbuja", "QuickSort"};
+                combo  = new JComboBox<>(ord);
+        //Agregando los componentes al grupo y al panel
+            S1.add(ordenamiento);
+            S1.add(busqueda);
+            S1.add(combo);
+
+        //SEGUNDO PANEL(Panel de Datos)
+
+        S2 = new JPanel(new GridLayout(3,1,10,5));
+        S2.setBorder(BorderFactory.createTitledBorder("DATOS Y CANTIDAD"));
+        
+        aleatorio = new JButton("Aleatorio");
+        manual = new JButton("Manual");
+        spin = new JSpinner(new SpinnerNumberModel(5, 5, 100, 1));
+        
+        S2.add(aleatorio); S2.add(manual); S2.add(spin); 
+
+        //Panel superior izquierdo inferior
+        S4 = new JPanel(new GridLayout(3,1));
+        ejecutar = new JButton("Ejecutar");
+
+        S4.add(new JLabel("Velocidad"));
+        velodidad = new JSlider(1, 10, 1);
+        S4.add(velodidad);
+        S4.add(ejecutar);
+        
+
+        //Agregar paneles al panel superior
+        superior = new JPanel(new GridLayout(4,1));
+        superior.add(S1);
+        superior.add(S2);
+        superior.add(S4);
+
+        add(superior, BorderLayout.WEST);
     }
 }
