@@ -2,6 +2,7 @@ package Paneles;
 
 import javax.swing.*;
 import java.awt.*;
+import Paneles.SubPanelesLaboratorio.*;
 
 public class Laboratorio extends JPanel{
     JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo;

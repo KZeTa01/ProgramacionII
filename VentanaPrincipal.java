@@ -1,9 +1,9 @@
 import javax.swing.*;
-import Paneles.*;
+import Paneles.*; 
 
 public class VentanaPrincipal extends JFrame {
-    JTabbedPane pestañas;
     JPanel laboratorio, interativo, registro;
+    JTabbedPane pestañas;
 
     public VentanaPrincipal() {
         configurarVentana();
