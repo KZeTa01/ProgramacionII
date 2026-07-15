@@ -1,11 +1,11 @@
 import javax.swing.*;
-import Paneles.Interactivo;
-import Paneles.Laboratorio;
-import Paneles.Registro;
+import Paneles.*; 
 
 public class VentanaPrincipal extends JFrame {
     JTabbedPane pestañas;
-    JPanel laboratorio, interativo, registro;
+    Interativo laboratorio;
+    Laboratorio lab; 
+    Registros reb; 
 
     public VentanaPrincipal() {
         configurarVentana();
@@ -13,14 +13,12 @@ public class VentanaPrincipal extends JFrame {
     }
 
     public void configurarVentana() {
-        this.setTitle("Mi Ventana");
-        this.setSize(900, 600);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        laboratorio = new Laboratorio();
-        interativo = new Interactivo();
-        registro = new Registro();
+        setTitle("Mi Ventana");
+        setSize(900, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+
     }
 
     public void cargarComponentes(JPanel laboratorio, JPanel interativo, JPanel registros) {
