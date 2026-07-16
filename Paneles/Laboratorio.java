@@ -2,15 +2,20 @@ package Paneles;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import Paneles.SubPanelesLaboratorio.*;
 
-public class Laboratorio extends JPanel{
+public class Laboratorio extends JPanel implements ActionListener {
     JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo;
-    
-    JRadioButton rbOrdenamiento, rbBusqueda;
-    ButtonGroup bgOpciones;
+    JButton btnEjecutar, btnAleatorio, btnManual;
+    JSlider sdrVelocidad;
+    JRadioButton rbOrdenamiento,rbBusqueda; 
+    ButtonGroup grupoBotones;
+    JComboBox<String> combo;
+    DefaultComboBoxModel<String> modeloCombo;
+    final String [] algoritmosOrdenamiento = {"Selección", "Inserción", "Burbuja"};
+    final String [] algoritmosBusqueda = {"Secuencial", "Binaria"};
 
-    JComboBox<String> cbAlgoritmos;
     JSpinner spCantidad;
     
 
@@ -21,37 +26,9 @@ public class Laboratorio extends JPanel{
 
     public void configurarPestaña() {
         setLayout(new BorderLayout());
-        pOpciones = AgregarPanelOpciones();
-        add(pOpciones, BorderLayout.WEST);
 
         pCentro = AgregarPanelCentro();
         add(pCentro, BorderLayout.CENTER);
-    }
-    //Panel Opciones
-    public JPanel AgregarPanelOpciones() {
-        pOpciones = new JPanel();
-        pOpciones.setBorder(BorderFactory.createTitledBorder("Opciones"));
-        pOpciones.setLayout(new FlowLayout());
-        
-        rbOrdenamiento = new JRadioButton("Ordenamiento");
-        rbBusqueda = new JRadioButton("Búsqueda");
-        bgOpciones = new ButtonGroup();
-        bgOpciones.add(rbOrdenamiento);
-        bgOpciones.add(rbBusqueda);
-        
-        cbAlgoritmos = new JComboBox<>();
-        cbAlgoritmos.addItem("Burbuja");
-        cbAlgoritmos.addItem("Selección");
-        cbAlgoritmos.addItem("Inserción");
-        
-        spCantidad = new JSpinner(new SpinnerNumberModel(10, 1, 100, 1));
-        
-        pOpciones.add(rbOrdenamiento);
-        pOpciones.add(rbBusqueda);
-        pOpciones.add(cbAlgoritmos);
-        pOpciones.add(spCantidad);
-        
-        return pOpciones;
     }
 
 
@@ -75,61 +52,67 @@ public class Laboratorio extends JPanel{
 
     }
     public void cargarComponentesLab(){
-        JSpinner spin; 
-        JSlider velodidad;
-        JButton aleatorio,ejecutar, manual;  
-        JComboBox combo; 
-        JRadioButton ordenamiento,busqueda; 
-        ButtonGroup grupo; 
-        JPanel superior,S1,S2,S4,medio1,medio2,inferior,izquierda,IzModo,IzAlgoritmo,Izdatos;
-        String[] busq; 
+        ButtonGroup grupoBotones; 
+        JPanel superior,pModos,pDatos,pInferior;
         
         //PRIMER PANEL(Panel de modos)
-        S1 =new JPanel(new GridLayout(3,1,10,10));
-        S1.setBorder(BorderFactory.createTitledBorder("Modo")); 
+        pModos =new JPanel(new GridLayout(3,1,10,10));
+        pModos.setBorder(BorderFactory.createTitledBorder("Algoritmo")); 
             //Generando el grupo de botones
-                grupo = new ButtonGroup(); 
-                ordenamiento = new JRadioButton("Ordenamiento"); 
-                busqueda = new JRadioButton("Busqueda");
+                grupoBotones = new ButtonGroup(); 
+                rbOrdenamiento = new JRadioButton("Ordenamiento",true); 
+                rbBusqueda = new JRadioButton("Busqueda");
+                //agregando listener a los botones
+                rbOrdenamiento.addActionListener(this);
+                rbBusqueda.addActionListener(this);
                 //agregando los botones al grupo
-                grupo.add(ordenamiento);
-                grupo.add(busqueda);
+                grupoBotones.add(rbOrdenamiento);
+                grupoBotones.add(rbBusqueda);
             //creando combo de algoritmos de busqueda
-                
-                String[] ord = {"Selección", "Inserción", "Burbuja", "QuickSort"};
-                combo  = new JComboBox<>(ord);
+                combo  = new JComboBox<>(algoritmosOrdenamiento);
         //Agregando los componentes al grupo y al panel
-            S1.add(ordenamiento);
-            S1.add(busqueda);
-            S1.add(combo);
+            pModos.add(rbOrdenamiento);
+            pModos.add(rbBusqueda);
+            pModos.add(combo);
 
         //SEGUNDO PANEL(Panel de Datos)
 
-        S2 = new JPanel(new GridLayout(3,1,10,5));
-        S2.setBorder(BorderFactory.createTitledBorder("DATOS Y CANTIDAD"));
+        pDatos = new JPanel(new GridLayout(3,1,10,5));
+        pDatos.setBorder(BorderFactory.createTitledBorder("Datos: Modo - Cantidad - Busqueda"));
         
-        aleatorio = new JButton("Aleatorio");
-        manual = new JButton("Manual");
-        spin = new JSpinner(new SpinnerNumberModel(5, 5, 100, 1));
+        btnAleatorio = new JButton("Aleatorio");
+        btnManual = new JButton("Manual");
+        spCantidad = new JSpinner(new SpinnerNumberModel(5, 5, 100, 1));
         
-        S2.add(aleatorio); S2.add(manual); S2.add(spin); 
+        pDatos.add(btnAleatorio); pDatos.add(btnManual); pDatos.add(spCantidad); 
 
-        //Panel superior izquierdo inferior
-        S4 = new JPanel(new GridLayout(3,1));
-        ejecutar = new JButton("Ejecutar");
+        //Panel superior izquierdo inferior (Velocidad y ejecutar)
+        pInferior = new JPanel(new GridLayout(3,1));
+        btnEjecutar = new JButton("Ejecutar");
 
-        S4.add(new JLabel("Velocidad"));
-        velodidad = new JSlider(1, 3, 1);
-        S4.add(velodidad);
-        S4.add(ejecutar);
+        pInferior.add(new JLabel("Velocidad"));
+        sdrVelocidad = new JSlider(1, 10, 1);
+        pInferior.add(sdrVelocidad);
+        pInferior.add(btnEjecutar);
         
 
         //Agregar paneles al panel superior
         superior = new JPanel(new GridLayout(4,1));
-        superior.add(S1);
-        superior.add(S2);
-        superior.add(S4);
+        superior.add(pModos);
+        superior.add(pDatos);
+        superior.add(pInferior);
 
         add(superior, BorderLayout.WEST);
+    }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()== rbOrdenamiento) {
+            combo.setModel(new DefaultComboBoxModel<>(algoritmosOrdenamiento));
+        } else if (e.getSource() == rbBusqueda) {
+            combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
+            combo.setSelectedIndex(0);
+        }
     }
 }
