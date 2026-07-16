@@ -81,7 +81,7 @@ public class Laboratorio extends JPanel{
         JComboBox combo; 
         JRadioButton ordenamiento,busqueda; 
         ButtonGroup grupo; 
-        JPanel superior,S1,S2,S3,S33,S4,medio1,medio2,inferior,izquierda,IzModo,IzAlgoritmo,Izdatos;
+        JPanel superior,S1,S2,S4,medio1,medio2,inferior,izquierda,IzModo,IzAlgoritmo,Izdatos;
         String[] busq; 
         
         //PRIMER PANEL(Panel de modos)
@@ -119,7 +119,7 @@ public class Laboratorio extends JPanel{
         ejecutar = new JButton("Ejecutar");
 
         S4.add(new JLabel("Velocidad"));
-        velodidad = new JSlider(1, 10, 1);
+        velodidad = new JSlider(1, 3, 1);
         S4.add(velodidad);
         S4.add(ejecutar);
         

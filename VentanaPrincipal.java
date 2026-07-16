@@ -11,7 +11,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     public void configurarVentana() {
-        setTitle("Mi Ventana");
+        setTitle("Laboratorio-Visual-Algoritmos");
         setSize(900, 600);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
