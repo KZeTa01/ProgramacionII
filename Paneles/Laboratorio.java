@@ -133,17 +133,14 @@ public class Laboratorio extends JPanel implements ActionListener {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
             txtBusqueda.setEnabled(true);
         } else if (e.getSource() == btnAleatorio){
-            int [] a; 
-            
+            int[] a; 
             cantidadBarras = (int) spCantidad.getValue();
+            panelDatos.marcarError(false);
             a = panelGrafico.generarDatosAleatorio(cantidadBarras);
             panelDatos.desactivar(a);
         } else if (e.getSource() == btnManual){
-            panelDatos.activar();
-            panelDatos.marcarError(false);
             
-           
-        } else if (e.getSource() == btnManual){
+            panelDatos.activar();
             String texto = panelDatos.getTexto();
 
             if (texto.isEmpty()) {
@@ -155,7 +152,17 @@ public class Laboratorio extends JPanel implements ActionListener {
             }
 
             try {
+                int cantidadEsperada = (int) spCantidad.getValue();
                 int[] datosManual = parsearDatosManuales(texto);
+
+                if (datosManual.length != cantidadEsperada) {
+                    panelDatos.marcarError(true);
+                    JOptionPane.showMessageDialog(this,
+                            "Debe ingresar exactamente " + cantidadEsperada + " valor(es) para coincidir con la cantidad de barras.",
+                            "Cantidad de datos incorrecta", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 cantidadBarras = datosManual.length;
                 panelDatos.marcarError(false);
                 panelGrafico.setDatos(datosManual);

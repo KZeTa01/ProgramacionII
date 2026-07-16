@@ -5,7 +5,8 @@ import javax.swing.*;
 
 public class PanelDatos extends JPanel implements FocusListener{
     private String texto = "Ej: 5, 3, 8, 1, 9, 2"; 
-    private JTextField caja;
+    JTextField caja;
+    PanelGrafico aleatorio; 
 
     public JTextField getCaja(){
         return caja; 
@@ -46,7 +47,6 @@ public class PanelDatos extends JPanel implements FocusListener{
 
     public void cargarComp(){
         JPanel panel = new JPanel(); 
-         
             
         panel.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createTitledBorder("Valores separados por comas"),
