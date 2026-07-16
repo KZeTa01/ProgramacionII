@@ -131,14 +131,13 @@ public class Laboratorio extends JPanel implements ActionListener {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
             txtBusqueda.setEnabled(true);
         } else if (e.getSource() == btnAleatorio){
+            int [] a; 
+            
             cantidadBarras = (int) spCantidad.getValue();
-            int [] a= panelGrafico.generarDatosAleatorio(cantidadBarras);
-            for (int i : a) {
-                System.out.print(i+" ");
-            }
-            System.out.println(" ");
+            a = panelGrafico.generarDatosAleatorio(cantidadBarras);
+            panelDatos.desactivar(a);
         } else if (e.getSource() == btnManual){
-
+                panelDatos.activar();
         } else if (e.getSource() == btnEjecutar){
             
         }
