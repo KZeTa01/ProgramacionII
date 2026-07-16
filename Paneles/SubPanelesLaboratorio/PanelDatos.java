@@ -5,12 +5,13 @@ import javax.swing.*;
 
 public class PanelDatos extends JPanel implements FocusListener{
     private String texto = "Ej: 5, 3, 8, 1, 9, 2"; 
-    JTextField caja;
-    PanelGrafico aleatorio; 
+    private JTextField caja;
 
     public JTextField getCaja(){
         return caja; 
     }
+    
+
     public void desactivar(int[] valores){
         caja.setEnabled(false);
         StringBuilder sb = new StringBuilder();
@@ -28,8 +29,7 @@ public class PanelDatos extends JPanel implements FocusListener{
     public void activar(){
         caja.setEnabled(true);
         caja.setForeground(Color.BLUE);
-        caja.setText(texto);
-        caja.setForeground(Color.GRAY); 
+
         
     }
     public PanelDatos() {
@@ -80,8 +80,17 @@ public class PanelDatos extends JPanel implements FocusListener{
             campo.setText(texto);
         }
     }
-   
+
+    public String getTexto() {
+        String valorActual = caja.getText();
+        if (valorActual == null || valorActual.equals(texto)) {
+            return "";
+        }
+        return valorActual.trim();
+    }
+
+    public void marcarError(boolean error) {
+        caja.setBorder(BorderFactory.createLineBorder(error ? Color.RED : Color.GRAY, error ? 2 : 1));
+    }
 
 }
-        
-    
