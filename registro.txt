@@ -1,0 +1,90 @@
+(18:00:43) [INFO] Datos aleatorios generados (5 valores): [38, 30, 4, 45, 2]
+
+(18:00:47) [INFO] Iniciando ordenamiento por Selección
+(18:00:47) [PASO] Ejecutando Ordenamiento - Algoritmo: Selección - Velocidad: 1
+(18:00:48) [PASO] Comparando posición 1 (30) con el menor actual, posición 0 (38)
+(18:00:48) [PASO] Comparando posición 2 (4) con el menor actual, posición 1 (30)
+(18:00:49) [PASO] Comparando posición 3 (45) con el menor actual, posición 2 (4)
+(18:00:50) [PASO] Comparando posición 4 (2) con el menor actual, posición 2 (4)
+(18:00:50) [SWAP] Intercambiando posiciones 0 y 4
+(18:00:51) [INFO] Posición 0 quedó ordenada
+(18:00:52) [PASO] Comparando posición 2 (4) con el menor actual, posición 1 (30)
+(18:00:52) [PASO] Comparando posición 3 (45) con el menor actual, posición 2 (4)
+(18:00:53) [PASO] Comparando posición 4 (38) con el menor actual, posición 2 (4)
+(18:00:54) [SWAP] Intercambiando posiciones 1 y 2
+(18:00:55) [INFO] Posición 1 quedó ordenada
+(18:00:55) [PASO] Comparando posición 3 (45) con el menor actual, posición 2 (30)
+(18:00:56) [PASO] Comparando posición 4 (38) con el menor actual, posición 2 (30)
+(18:00:57) [INFO] Posición 2 quedó ordenada
+(18:00:57) [PASO] Comparando posición 4 (38) con el menor actual, posición 3 (45)
+(18:00:58) [SWAP] Intercambiando posiciones 3 y 4
+(18:00:59) [INFO] Posición 3 quedó ordenada
+(18:00:59) [INFO] Ordenamiento por Selección finalizado
+
+(18:01:05) [INFO] Iniciando ordenamiento por Inserción
+(18:01:05) [PASO] Ejecutando Ordenamiento - Algoritmo: Inserción - Velocidad: 1
+(18:01:06) [PASO] Tomando el elemento en posición 1 (4) para insertarlo
+(18:01:06) [INFO] Insertando 4 en la posición 1
+(18:01:07) [PASO] Tomando el elemento en posición 2 (30) para insertarlo
+(18:01:08) [INFO] Insertando 30 en la posición 2
+(18:01:09) [PASO] Tomando el elemento en posición 3 (38) para insertarlo
+(18:01:09) [INFO] Insertando 38 en la posición 3
+(18:01:10) [PASO] Tomando el elemento en posición 4 (45) para insertarlo
+(18:01:11) [INFO] Insertando 45 en la posición 4
+(18:01:11) [INFO] Ordenamiento por Inserción finalizado
+(18:01:15) [INFO] Datos aleatorios generados (5 valores): [4, 31, 29, 11, 45]
+
+(18:01:19) [INFO] Iniciando ordenamiento por Inserción
+(18:01:19) [PASO] Ejecutando Ordenamiento - Algoritmo: Inserción - Velocidad: 1
+(18:01:19) [PASO] Tomando el elemento en posición 1 (31) para insertarlo
+(18:01:20) [INFO] Insertando 31 en la posición 1
+(18:01:21) [PASO] Tomando el elemento en posición 2 (29) para insertarlo
+(18:01:21) [PASO] Comparando 31 (posición 1) con 29
+(18:01:22) [SWAP] Desplazando 31 una posición a la derecha
+(18:01:23) [INFO] Insertando 29 en la posición 1
+(18:01:24) [PASO] Tomando el elemento en posición 3 (11) para insertarlo
+(18:01:24) [PASO] Comparando 31 (posición 2) con 11
+(18:01:25) [SWAP] Desplazando 31 una posición a la derecha
+(18:01:26) [PASO] Comparando 29 (posición 1) con 11
+(18:01:26) [SWAP] Desplazando 29 una posición a la derecha
+(18:01:27) [INFO] Insertando 11 en la posición 1
+(18:01:28) [PASO] Tomando el elemento en posición 4 (45) para insertarlo
+(18:01:28) [INFO] Insertando 45 en la posición 4
+(18:01:29) [INFO] Ordenamiento por Inserción finalizado
+(18:01:44) [INFO] Datos aleatorios generados (5 valores): [8, 32, 17, 31, 40]
+
+(18:01:46) [INFO] Iniciando ordenamiento por Burbuja
+(18:01:46) [PASO] Ejecutando Ordenamiento - Algoritmo: Burbuja - Velocidad: 1
+(18:01:47) [PASO] Comparando posiciones 0 (8) y 1 (32)
+(18:01:47) [PASO] Comparando posiciones 1 (32) y 2 (17)
+(18:01:48) [SWAP] Intercambiando posiciones 1 y 2
+(18:01:49) [PASO] Comparando posiciones 2 (32) y 3 (31)
+(18:01:49) [SWAP] Intercambiando posiciones 2 y 3
+(18:01:50) [PASO] Comparando posiciones 3 (32) y 4 (40)
+(18:01:51) [INFO] Posición 4 quedó ordenada
+(18:01:51) [PASO] Comparando posiciones 0 (8) y 1 (17)
+(18:01:52) [PASO] Comparando posiciones 1 (17) y 2 (31)
+(18:01:53) [PASO] Comparando posiciones 2 (31) y 3 (32)
+(18:01:54) [INFO] Posición 3 quedó ordenada
+(18:01:54) [INFO] Ordenamiento Burbuja finalizado
+(18:03:51) [INFO] Datos aleatorios generados (5 valores): [15, 2, 32, 29, 43]
+
+(18:03:52) [INFO] Iniciando ordenamiento por Selección
+(18:03:52) [PASO] Ejecutando Ordenamiento - Algoritmo: Selección - Velocidad: 1
+(18:03:53) [PASO] Comparando posición 1 (2) con el menor actual, posición 0 (15)
+(18:03:53) [PASO] Comparando posición 2 (32) con el menor actual, posición 1 (2)
+(18:03:54) [PASO] Comparando posición 3 (29) con el menor actual, posición 1 (2)
+(18:03:55) [PASO] Comparando posición 4 (43) con el menor actual, posición 1 (2)
+(18:03:55) [SWAP] Intercambiando posiciones 0 y 1
+(18:03:56) [INFO] Posición 0 quedó ordenada
+(18:03:57) [PASO] Comparando posición 2 (32) con el menor actual, posición 1 (15)
+(18:03:58) [PASO] Comparando posición 3 (29) con el menor actual, posición 1 (15)
+(18:03:58) [PASO] Comparando posición 4 (43) con el menor actual, posición 1 (15)
+(18:03:59) [INFO] Posición 1 quedó ordenada
+(18:04:00) [PASO] Comparando posición 3 (29) con el menor actual, posición 2 (32)
+(18:04:00) [PASO] Comparando posición 4 (43) con el menor actual, posición 3 (29)
+(18:04:01) [SWAP] Intercambiando posiciones 2 y 3
+(18:04:02) [INFO] Posición 2 quedó ordenada
+(18:04:03) [PASO] Comparando posición 4 (43) con el menor actual, posición 3 (32)
+(18:04:03) [INFO] Posición 3 quedó ordenada
+(18:04:04) [INFO] Ordenamiento por Selección finalizado

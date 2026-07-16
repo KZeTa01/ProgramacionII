@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class PanelDatos extends JPanel implements FocusListener{
     private String texto = "Ej: 5, 3, 8, 1, 9, 2"; 
-    JTextField caja;
+    private JTextField caja;
     PanelGrafico aleatorio; 
 
     public JTextField getCaja(){

@@ -3,6 +3,8 @@ package Paneles.SubPanelesLaboratorio;
 import javax.swing.*;
 import java.awt.*;
 
+import Math.PasoOrdenamiento;
+
 public class PanelGrafico extends JPanel {
 
     private int[] datos;
@@ -53,6 +55,12 @@ public class PanelGrafico extends JPanel {
     // Notifica al panel de dibujo que los datos cambiaron para que se vuelva a pintar
     private void actualizarGrafico() {
         panelBarras.setDatos(datos);
+    }
+
+    public void aplicarPaso(PasoOrdenamiento paso) {
+        this.datos = paso.getArreglo();
+        panelBarras.aplicarPaso(paso.getArreglo(), paso.getIdx1(), paso.getIdx2(),
+                paso.getOrdenados(), paso.getTipo());
     }
 
     /**
