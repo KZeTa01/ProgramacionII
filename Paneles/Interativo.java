@@ -12,6 +12,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -23,8 +24,10 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
  
  
@@ -178,5 +181,68 @@ public class Interativo extends JPanel{
 
     private void actualizarEstado() {
         
+    }
+
+    private enum TipoForma { CIRCULO, CUADRADO, TRIANGULO, ESTRELLA, HEXAGONO }
+    // Clase interna: representa una figura arrastrable y personalizada
+    // ==========================================================
+    private class Figura extends JComponent {
+        private Point offset;
+        private int ultimaX;
+        private final Color colorBase;
+        private final String texto;
+        private final TipoForma tipoForma;
+        private boolean hover = false;
+        private boolean arrastrando = false;
+        private float pulso = 0f; // 0 = sin pulso, 1 = pulso máximo (animación de aterrizaje)
+        private Timer timerPulso;
+ 
+        public Figura(Color color, String texto, TipoForma tipoForma) {
+            this.colorBase = color;
+            this.texto = texto;
+            this.tipoForma = tipoForma;
+            setPreferredSize(new Dimension(80, 100));
+            setSize(80, 100);
+            setCursor(new Cursor(Cursor.HAND_CURSOR));
+ 
+            MouseAdapter listenerArrastre = crearListenerArrastre();
+            addMouseListener(listenerArrastre);
+            addMouseMotionListener(listenerArrastre);
+        }
+
+        private MouseAdapter crearListenerArrastre() {
+            return new MouseAdapter() {
+ 
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    
+                }
+ 
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    
+                }
+ 
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    
+                }
+ 
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    
+                }
+ 
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    
+                }
+ 
+                @Override
+                public void mouseDragged(MouseEvent e) {
+                    
+                }
+            };
+        }
     }
 }
