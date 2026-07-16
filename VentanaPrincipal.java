@@ -23,7 +23,7 @@ public class VentanaPrincipal extends JFrame {
 
     public void cargarComponentes(JPanel laboratorio, JPanel interativo, JPanel registros) {
         pestañas = new JTabbedPane();
-        pestañas.addTab("Laboratorio", laboratorio);
+        pestañas.addTab("Principal", laboratorio);
         pestañas.addTab("Interativo", interativo);
         pestañas.addTab("Registros", registros);
         

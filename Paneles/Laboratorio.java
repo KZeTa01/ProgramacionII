@@ -1,11 +1,16 @@
 package Paneles;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -13,19 +18,25 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 import Paneles.SubPanelesLaboratorio.PanelDatos;
 import Paneles.SubPanelesLaboratorio.PanelGrafico;
 import Paneles.SubPanelesLaboratorio.PanelRegistro;
 
-public class Laboratorio extends JPanel{
-    JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo;
-    
-    JRadioButton rbOrdenamiento, rbBusqueda;
-    ButtonGroup bgOpciones;
+public class Laboratorio extends JPanel implements ActionListener {
+    JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo, pBuscar,superior;
+    JButton btnEjecutar, btnAleatorio, btnManual;
+    JSlider sdrVelocidad;
+    JRadioButton rbOrdenamiento,rbBusqueda; 
+    ButtonGroup grupoBotones;
+    JComboBox<String> combo;
+    DefaultComboBoxModel<String> modeloCombo;
+    JTextField txtBusqueda;
+    final String [] algoritmosOrdenamiento = {"Selección", "Inserción", "Burbuja"};
+    final String [] algoritmosBusqueda = {"Secuencial", "Binaria"};
 
-    JComboBox<String> cbAlgoritmos;
     JSpinner spCantidad;
     
 
@@ -36,37 +47,9 @@ public class Laboratorio extends JPanel{
 
     public void configurarPestaña() {
         setLayout(new BorderLayout());
-        pOpciones = AgregarPanelOpciones();
-        add(pOpciones, BorderLayout.WEST);
 
         pCentro = AgregarPanelCentro();
         add(pCentro, BorderLayout.CENTER);
-    }
-    //Panel Opciones
-    public JPanel AgregarPanelOpciones() {
-        pOpciones = new JPanel();
-        pOpciones.setBorder(BorderFactory.createTitledBorder("Opciones"));
-        pOpciones.setLayout(new FlowLayout());
-        
-        rbOrdenamiento = new JRadioButton("Ordenamiento");
-        rbBusqueda = new JRadioButton("Búsqueda");
-        bgOpciones = new ButtonGroup();
-        bgOpciones.add(rbOrdenamiento);
-        bgOpciones.add(rbBusqueda);
-        
-        cbAlgoritmos = new JComboBox<>();
-        cbAlgoritmos.addItem("Burbuja");
-        cbAlgoritmos.addItem("Selección");
-        cbAlgoritmos.addItem("Inserción");
-        
-        spCantidad = new JSpinner(new SpinnerNumberModel(10, 1, 100, 1));
-        
-        pOpciones.add(rbOrdenamiento);
-        pOpciones.add(rbBusqueda);
-        pOpciones.add(cbAlgoritmos);
-        pOpciones.add(spCantidad);
-        
-        return pOpciones;
     }
 
 
@@ -90,62 +73,79 @@ public class Laboratorio extends JPanel{
 
     }
     public void cargarComponentesLab(){
-        JSpinner spin; 
-        JSlider velocidad;
-        JButton aleatorio,ejecutar, manual;  
-        JComboBox combo; 
-        JRadioButton ordenamiento,busqueda; 
-        ButtonGroup grupo; 
-        JPanel superior,S1,S2,S4,medio1,medio2,inferior,izquierda,IzModo,IzAlgoritmo,Izdatos;
-        String[] busq; 
-        
+        ButtonGroup grupoBotones; 
+        JPanel pModos,pDatos,pInferior;
+
         //PRIMER PANEL(Panel de modos)
-        S1 =new JPanel(new GridLayout(3,1,10,10));
-        S1.setBorder(BorderFactory.createTitledBorder("Modo")); 
+        pModos =new JPanel(new GridLayout(3,1,10,10));
+        pModos.setBorder(BorderFactory.createTitledBorder("Algoritmo")); 
             //Generando el grupo de botones
-                grupo = new ButtonGroup(); 
-                ordenamiento = new JRadioButton("Ordenamiento"); 
-                busqueda = new JRadioButton("Busqueda");
+                grupoBotones = new ButtonGroup(); 
+                rbOrdenamiento = new JRadioButton("Ordenamiento",true); 
+                rbBusqueda = new JRadioButton("Busqueda");
+                //agregando listener a los botones
+                rbOrdenamiento.addActionListener(this);
+                rbBusqueda.addActionListener(this);
                 //agregando los botones al grupo
-                grupo.add(ordenamiento);
-                grupo.add(busqueda);
+                grupoBotones.add(rbOrdenamiento);
+                grupoBotones.add(rbBusqueda);
             //creando combo de algoritmos de busqueda
-                
-                String[] ord = {"Selección", "Inserción", "Burbuja", "QuickSort"};
-                combo  = new JComboBox<>(ord);
+                combo  = new JComboBox<>(algoritmosOrdenamiento);
         //Agregando los componentes al grupo y al panel
-            S1.add(ordenamiento);
-            S1.add(busqueda);
-            S1.add(combo);
+            pModos.add(rbOrdenamiento);
+            pModos.add(rbBusqueda);
+            pModos.add(combo);
 
         //SEGUNDO PANEL(Panel de Datos)
 
-        S2 = new JPanel(new GridLayout(3,1,10,5));
-        S2.setBorder(BorderFactory.createTitledBorder("DATOS Y CANTIDAD"));
+        pDatos = new JPanel(new GridLayout(3,1,10,5));
+        pDatos.setBorder(BorderFactory.createTitledBorder("Datos: Modo - Cantidad - Busqueda"));
         
-        aleatorio = new JButton("Aleatorio");
-        manual = new JButton("Manual");
-        spin = new JSpinner(new SpinnerNumberModel(5, 5, 100, 1));
+        btnAleatorio = new JButton("Aleatorio");
+        btnManual = new JButton("Manual");
+        spCantidad = new JSpinner(new SpinnerNumberModel(5, 5, 100, 1));
         
-        S2.add(aleatorio); S2.add(manual); S2.add(spin); 
+        pDatos.add(btnAleatorio); pDatos.add(btnManual); pDatos.add(spCantidad); 
 
-        //Panel superior izquierdo inferior
-        S4 = new JPanel(new GridLayout(3,1));
+        //Panel superior izquierdo inferior (Velocidad y ejecutar)
+        pInferior = new JPanel(new GridLayout(3,1));
+        btnEjecutar = new JButton("Ejecutar");
 
-        ejecutar = new JButton("Ejecutar");
+        pInferior.add(new JLabel("Velocidad"));
+        sdrVelocidad = new JSlider(1, 3, 1);
+        sdrVelocidad.setMajorTickSpacing(1);
+        sdrVelocidad.setMinorTickSpacing(1);
+        sdrVelocidad.setPaintTicks(true);
+        sdrVelocidad.setPaintLabels(true);
+        pInferior.add(sdrVelocidad);
+        pInferior.add(btnEjecutar);
 
-        S4.add(new JLabel("Velocidad"));
-        velocidad = new JSlider(1, 3, 1);
-        S4.add(velocidad);
-        S4.add(ejecutar);
-        
-
+        pBuscar = new JPanel(new FlowLayout(FlowLayout.CENTER,0,20));
+        pBuscar.setBorder(BorderFactory.createTitledBorder("Indique valor a buscar"));
+        txtBusqueda = new JTextField();
+        txtBusqueda.setEnabled(false);
+        txtBusqueda.setPreferredSize(new Dimension(150, 25));
+        pBuscar.add(txtBusqueda);
         //Agregar paneles al panel superior
-        superior = new JPanel(new GridLayout(3,1));
-        superior.add(S1);
-        superior.add(S2);
-        superior.add(S4);
+        superior = new JPanel();
+        superior.setLayout(new BoxLayout(superior, BoxLayout.Y_AXIS));
+        superior.add(pModos);
+        superior.add(pDatos);
+        superior.add(pBuscar);
+        superior.add(pInferior);
 
-        add(superior, BorderLayout.WEST);
+        JPanel izq = new JPanel(new BorderLayout()); izq.add(superior, BorderLayout.NORTH);
+        add(izq, BorderLayout.WEST);
+    }  
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()== rbOrdenamiento) {
+            combo.setModel(new DefaultComboBoxModel<>(algoritmosOrdenamiento));
+            txtBusqueda.setEnabled(false);
+        } else if (e.getSource() == rbBusqueda) {
+            combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
+            txtBusqueda.setEnabled(true);
+        }
     }
 }
