@@ -55,10 +55,6 @@ public class Laboratorio extends JPanel implements ActionListener {
     public void cargarComponentesLab(){
         ButtonGroup grupoBotones; 
         JPanel pModos,pDatos,pInferior;
-        pBuscar = new JPanel(new FlowLayout());
-        pBuscar.setBorder(BorderFactory.createTitledBorder("Indique valor a buscar"));
-        txtBusqueda = new JTextField(10);
-        pBuscar.add(txtBusqueda);
         //PRIMER PANEL(Panel de modos)
         pModos =new JPanel(new GridLayout(3,1,10,10));
         pModos.setBorder(BorderFactory.createTitledBorder("Modo")); 
@@ -95,33 +91,40 @@ public class Laboratorio extends JPanel implements ActionListener {
         btnEjecutar = new JButton("Ejecutar");
 
         pInferior.add(new JLabel("Velocidad"));
-        sdrVelocidad = new JSlider(1, 10, 1);
+        sdrVelocidad = new JSlider(1, 3, 1);
+        sdrVelocidad.setMajorTickSpacing(1);
+        sdrVelocidad.setMinorTickSpacing(1);
+        sdrVelocidad.setPaintTicks(true);
+        sdrVelocidad.setPaintLabels(true);
         pInferior.add(sdrVelocidad);
         pInferior.add(btnEjecutar);
-        
 
+        pBuscar = new JPanel(new FlowLayout(FlowLayout.CENTER,0,20));
+        pBuscar.setBorder(BorderFactory.createTitledBorder("Indique valor a buscar"));
+        txtBusqueda = new JTextField();
+        txtBusqueda.setEnabled(false);
+        txtBusqueda.setPreferredSize(new Dimension(150, 25));
+        pBuscar.add(txtBusqueda);
         //Agregar paneles al panel superior
-        superior = new JPanel(new GridLayout(4,1));
+        superior = new JPanel();
+        superior.setLayout(new BoxLayout(superior, BoxLayout.Y_AXIS));
         superior.add(pModos);
         superior.add(pDatos);
+        superior.add(pBuscar);
         superior.add(pInferior);
 
-        add(superior, BorderLayout.WEST);
-    }
-
+        JPanel izq = new JPanel(new BorderLayout()); izq.add(superior, BorderLayout.NORTH);
+        add(izq, BorderLayout.WEST);
+    }  
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()== rbOrdenamiento) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosOrdenamiento));
-            superior.remove(pBuscar);
-            superior.revalidate();
-            superior.repaint();
+            txtBusqueda.setEnabled(false);
         } else if (e.getSource() == rbBusqueda) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
-            superior.add(pBuscar);
-            superior.revalidate();
-            superior.repaint();
+            txtBusqueda.setEnabled(true);
         }
     }
 }
