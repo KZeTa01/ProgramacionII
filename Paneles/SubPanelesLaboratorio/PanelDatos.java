@@ -5,12 +5,38 @@ import javax.swing.*;
 
 public class PanelDatos extends JPanel implements FocusListener{
     private String texto = "Ej: 5, 3, 8, 1, 9, 2"; 
-        
+    JTextField caja;
+    PanelGrafico aleatorio; 
 
+    public JTextField getCaja(){
+        return caja; 
+    }
+    public void desactivar(int[] valores){
+        caja.setEnabled(false);
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < valores.length; i++) {
+            sb.append(valores[i]);
+            if (i < valores.length - 1) {
+                sb.append(", ");
+            }
+        }
+        caja.setText(sb.toString());
+        caja.setForeground(Color.red);
+
+    }
+    public void activar(){
+        caja.setEnabled(true);
+        caja.setForeground(Color.BLUE);
+        caja.setText(texto);
+        caja.setForeground(Color.GRAY); 
+        
+    }
     public PanelDatos() {
         configurarPanel();
         cargarComp(); 
     }
+
 
     public void configurarPanel() {
         setLayout(new FlowLayout(FlowLayout.CENTER,10,30));
@@ -20,7 +46,7 @@ public class PanelDatos extends JPanel implements FocusListener{
 
     public void cargarComp(){
         JPanel panel = new JPanel(); 
-        JTextField caja; 
+         
             
         panel.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createTitledBorder("Valores separados por comas"),

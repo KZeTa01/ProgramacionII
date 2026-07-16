@@ -27,18 +27,21 @@ import Paneles.SubPanelesLaboratorio.PanelRegistro;
 
 public class Laboratorio extends JPanel implements ActionListener {
     JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo, pBuscar,superior;
+    PanelGrafico panelGrafico;
+    PanelDatos panelDatos;
+    PanelRegistro panelRegistro; 
     JButton btnEjecutar, btnAleatorio, btnManual;
     JSlider sdrVelocidad;
     JRadioButton rbOrdenamiento,rbBusqueda; 
     ButtonGroup grupoBotones;
     JComboBox<String> combo;
+    int cantidadBarras;
     DefaultComboBoxModel<String> modeloCombo;
     JTextField txtBusqueda;
     final String [] algoritmosOrdenamiento = {"Selección", "Inserción", "Burbuja"};
     final String [] algoritmosBusqueda = {"Secuencial", "Binaria"};
 
     JSpinner spCantidad;
-    
 
     public Laboratorio() {
         configurarPestaña();
@@ -58,9 +61,9 @@ public class Laboratorio extends JPanel implements ActionListener {
         pCentro = new JPanel();
         pCentro.setLayout(new GridLayout(3, 1));
         
-        PanelDatos panelDatos = new PanelDatos();
-        PanelGrafico panelGrafico = new PanelGrafico();
-        PanelRegistro panelRegistro = new PanelRegistro();
+        panelDatos = new PanelDatos();
+        panelGrafico = new PanelGrafico();
+        panelRegistro = new PanelRegistro();
         pCentro.add(panelDatos);
         pCentro.add(panelGrafico);
         pCentro.add(panelRegistro);
@@ -102,7 +105,9 @@ public class Laboratorio extends JPanel implements ActionListener {
         pDatos.setBorder(BorderFactory.createTitledBorder("Datos: Modo - Cantidad - Busqueda"));
         
         btnAleatorio = new JButton("Aleatorio");
+        btnAleatorio.addActionListener(this);
         btnManual = new JButton("Manual");
+        btnManual.addActionListener(this);
         spCantidad = new JSpinner(new SpinnerNumberModel(5, 5, 100, 1));
         
         pDatos.add(btnAleatorio); pDatos.add(btnManual); pDatos.add(spCantidad); 
@@ -146,6 +151,16 @@ public class Laboratorio extends JPanel implements ActionListener {
         } else if (e.getSource() == rbBusqueda) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
             txtBusqueda.setEnabled(true);
+        } else if (e.getSource() == btnAleatorio){
+            int [] a; 
+            
+            cantidadBarras = (int) spCantidad.getValue();
+            a = panelGrafico.generarDatosAleatorio(cantidadBarras);
+            panelDatos.desactivar(a);
+        } else if (e.getSource() == btnManual){
+                panelDatos.activar();
+        } else if (e.getSource() == btnEjecutar){
+            
         }
     }
 }
