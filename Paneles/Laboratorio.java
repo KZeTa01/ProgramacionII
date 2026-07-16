@@ -1,9 +1,29 @@
 package Paneles;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import Paneles.SubPanelesLaboratorio.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+
+import Paneles.SubPanelesLaboratorio.PanelDatos;
+import Paneles.SubPanelesLaboratorio.PanelGrafico;
+import Paneles.SubPanelesLaboratorio.PanelRegistro;
 
 public class Laboratorio extends JPanel implements ActionListener {
     JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo, pBuscar,superior;
@@ -58,6 +78,7 @@ public class Laboratorio extends JPanel implements ActionListener {
     public void cargarComponentesLab(){
         ButtonGroup grupoBotones; 
         JPanel pModos,pDatos,pInferior;
+
         //PRIMER PANEL(Panel de modos)
         pModos =new JPanel(new GridLayout(3,1,10,10));
         pModos.setBorder(BorderFactory.createTitledBorder("Algoritmo")); 
