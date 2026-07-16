@@ -1,15 +1,16 @@
 package Paneles;
 
 import javax.swing.*;
+
+import Excepciones.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import Paneles.SubPanelesLaboratorio.*;
 
 public class Laboratorio extends JPanel implements ActionListener {
     JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo, pBuscar,superior;
-    PanelGrafico panelGrafico;
-    PanelDatos panelDatos;
-    PanelRegistro panelRegistro; 
+    PanelGrafico panelGrafico; PanelDatos panelDatos; PanelRegistro panelRegistro; 
     JButton btnEjecutar, btnAleatorio, btnManual;
     JSlider sdrVelocidad;
     JRadioButton rbOrdenamiento,rbBusqueda; 
@@ -132,15 +133,62 @@ public class Laboratorio extends JPanel implements ActionListener {
             txtBusqueda.setEnabled(true);
         } else if (e.getSource() == btnAleatorio){
             cantidadBarras = (int) spCantidad.getValue();
+            panelDatos.marcarError(false);
             int [] a= panelGrafico.generarDatosAleatorio(cantidadBarras);
             for (int i : a) {
                 System.out.print(i+" ");
             }
             System.out.println(" ");
         } else if (e.getSource() == btnManual){
+            String texto = panelDatos.getTexto();
 
+            if (texto.isEmpty()) {
+                panelDatos.marcarError(true);
+                JOptionPane.showMessageDialog(this,
+                        "Ingrese al menos un valor separado por ';' (Ej: 3;33;5;7;32).",
+                        "Datos vacíos", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try {
+                int[] datosManual = parsearDatosManuales(texto);
+                cantidadBarras = datosManual.length;
+                panelDatos.marcarError(false);
+                panelGrafico.setDatos(datosManual);
+            } catch (NumberFormatException ex) {
+                panelDatos.marcarError(true);
+                JOptionPane.showMessageDialog(this,
+                        "Formato inválido. Ingrese solo números enteros separados por ';' (Ej: 3;33;5;7;32).\n"
+                                + "Detalle: " + ex.getMessage(),
+                        "Error en los datos", JOptionPane.ERROR_MESSAGE);
+            }
         } else if (e.getSource() == btnEjecutar){
             
         }
+    }
+
+    private int[] parsearDatosManuales(String texto) {
+        String[] partes = texto.split(",");
+        int[] resultado = new int[partes.length];
+
+        for (int i = 0; i < partes.length; i++) {
+            String valor = partes[i].trim();
+            if (valor.isEmpty()) {
+                throw new NumberFormatException("valor vacío en la posición " + (i + 1));
+            }
+            try {
+                if (Integer.parseInt(valor)>50) {
+                    resultado[i] = 50;
+                    throw new ValorExcedidoException("El valor " + resultado[i] + " (posición " + (i + 1) + ") excede el máximo permitido de 50, se reemplazó por el valor máximo.");
+                } else {
+                    resultado[i] = Integer.parseInt(valor);
+                }
+            } catch (NumberFormatException ex) {
+                throw new NumberFormatException("\"" + valor + "\" no es un número entero (posición " + (i + 1) + ")");
+            } catch (ValorExcedidoException ex){
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Valor Excedido", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        return resultado;
     }
 }

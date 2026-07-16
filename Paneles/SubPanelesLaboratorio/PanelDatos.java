@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class PanelDatos extends JPanel implements FocusListener{
     private String texto = "Ej: 5, 3, 8, 1, 9, 2"; 
-        
+    private JTextField caja;
 
     public PanelDatos() {
         configurarPanel();
@@ -20,7 +20,6 @@ public class PanelDatos extends JPanel implements FocusListener{
 
     public void cargarComp(){
         JPanel panel = new JPanel(); 
-        JTextField caja; 
             
         panel.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createTitledBorder("Valores separados por comas"),
@@ -54,8 +53,17 @@ public class PanelDatos extends JPanel implements FocusListener{
             campo.setText(texto);
         }
     }
-   
+
+    public String getTexto() {
+        String valorActual = caja.getText();
+        if (valorActual == null || valorActual.equals(texto)) {
+            return "";
+        }
+        return valorActual.trim();
+    }
+
+    public void marcarError(boolean error) {
+        caja.setBorder(BorderFactory.createLineBorder(error ? Color.RED : Color.GRAY, error ? 2 : 1));
+    }
 
 }
-        
-    
