@@ -96,7 +96,10 @@ public class Laboratorio extends JPanel implements ActionListener {
 
         pInferior.add(new JLabel("Velocidad"));
         sdrVelocidad = new JSlider(1, 3, 1);
+        sdrVelocidad.setMajorTickSpacing(1);
         sdrVelocidad.setMinorTickSpacing(1);
+        sdrVelocidad.setPaintTicks(true);
+        sdrVelocidad.setPaintLabels(true); 
         pInferior.add(sdrVelocidad);
         pInferior.add(btnEjecutar);
         
