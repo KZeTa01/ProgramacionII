@@ -52,23 +52,12 @@ public class Laboratorio extends JPanel implements ActionListener {
 
     }
     public void cargarComponentesLab(){
-<<<<<<< HEAD
         ButtonGroup grupoBotones; 
         JPanel superior,pModos,pDatos,pInferior;
-=======
-        JSpinner spin; 
-        JSlider velodidad;
-        JButton aleatorio,ejecutar, manual;  
-        JComboBox combo; 
-        JRadioButton ordenamiento,busqueda; 
-        ButtonGroup grupo; 
-        JPanel superior,S1,S2,S4,medio1,medio2,inferior,izquierda,IzModo,IzAlgoritmo,Izdatos;
-        String[] busq; 
->>>>>>> 71b136857e84845335f5a6d11d3c64a2d62d9fc1
         
         //PRIMER PANEL(Panel de modos)
         pModos =new JPanel(new GridLayout(3,1,10,10));
-        pModos.setBorder(BorderFactory.createTitledBorder("Modo")); 
+        pModos.setBorder(BorderFactory.createTitledBorder("Algoritmo")); 
             //Generando el grupo de botones
                 grupoBotones = new ButtonGroup(); 
                 rbOrdenamiento = new JRadioButton("Ordenamiento",true); 
@@ -89,7 +78,7 @@ public class Laboratorio extends JPanel implements ActionListener {
         //SEGUNDO PANEL(Panel de Datos)
 
         pDatos = new JPanel(new GridLayout(3,1,10,5));
-        pDatos.setBorder(BorderFactory.createTitledBorder("DATOS Y CANTIDAD"));
+        pDatos.setBorder(BorderFactory.createTitledBorder("Datos: Modo - Cantidad - Busqueda"));
         
         btnAleatorio = new JButton("Aleatorio");
         btnManual = new JButton("Manual");
@@ -101,17 +90,10 @@ public class Laboratorio extends JPanel implements ActionListener {
         pInferior = new JPanel(new GridLayout(3,1));
         btnEjecutar = new JButton("Ejecutar");
 
-<<<<<<< HEAD
         pInferior.add(new JLabel("Velocidad"));
         sdrVelocidad = new JSlider(1, 10, 1);
         pInferior.add(sdrVelocidad);
         pInferior.add(btnEjecutar);
-=======
-        S4.add(new JLabel("Velocidad"));
-        velodidad = new JSlider(1, 3, 1);
-        S4.add(velodidad);
-        S4.add(ejecutar);
->>>>>>> 71b136857e84845335f5a6d11d3c64a2d62d9fc1
         
 
         //Agregar paneles al panel superior
