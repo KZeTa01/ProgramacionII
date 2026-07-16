@@ -6,13 +6,14 @@ import java.awt.event.*;
 import Paneles.SubPanelesLaboratorio.*;
 
 public class Laboratorio extends JPanel implements ActionListener {
-    JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo;
+    JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo, pBuscar,superior;
     JButton btnEjecutar, btnAleatorio, btnManual;
     JSlider sdrVelocidad;
     JRadioButton rbOrdenamiento,rbBusqueda; 
     ButtonGroup grupoBotones;
     JComboBox<String> combo;
     DefaultComboBoxModel<String> modeloCombo;
+    JTextField txtBusqueda;
     final String [] algoritmosOrdenamiento = {"Selección", "Inserción", "Burbuja"};
     final String [] algoritmosBusqueda = {"Secuencial", "Binaria"};
 
@@ -53,8 +54,11 @@ public class Laboratorio extends JPanel implements ActionListener {
     }
     public void cargarComponentesLab(){
         ButtonGroup grupoBotones; 
-        JPanel superior,pModos,pDatos,pInferior;
-        
+        JPanel pModos,pDatos,pInferior;
+        pBuscar = new JPanel(new FlowLayout());
+        pBuscar.setBorder(BorderFactory.createTitledBorder("Indique valor a buscar"));
+        txtBusqueda = new JTextField(10);
+        pBuscar.add(txtBusqueda);
         //PRIMER PANEL(Panel de modos)
         pModos =new JPanel(new GridLayout(3,1,10,10));
         pModos.setBorder(BorderFactory.createTitledBorder("Algoritmo")); 
@@ -91,7 +95,7 @@ public class Laboratorio extends JPanel implements ActionListener {
         btnEjecutar = new JButton("Ejecutar");
 
         pInferior.add(new JLabel("Velocidad"));
-        sdrVelocidad = new JSlider(1, 10, 1);
+        sdrVelocidad = new JSlider(1, 3, 1);
         pInferior.add(sdrVelocidad);
         pInferior.add(btnEjecutar);
         
@@ -110,9 +114,14 @@ public class Laboratorio extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()== rbOrdenamiento) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosOrdenamiento));
+            superior.remove(pBuscar);
+            superior.revalidate();
+            superior.repaint();
         } else if (e.getSource() == rbBusqueda) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
-            combo.setSelectedIndex(0);
+            superior.add(pBuscar);
+            superior.revalidate();
+            superior.repaint();
         }
     }
 }
