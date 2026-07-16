@@ -6,6 +6,7 @@ import java.awt.*;
 public class PanelGrafico extends JPanel {
 
     private int[] datos;
+    private String lineaDatos;
     private final PanelBarras panelBarras;
     private final JScrollPane scrollPane;
 
