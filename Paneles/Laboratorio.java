@@ -1,8 +1,23 @@
 package Paneles;
 
-import javax.swing.*;
-import java.awt.*;
-import Paneles.SubPanelesLaboratorio.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+
+import Paneles.SubPanelesLaboratorio.PanelDatos;
+import Paneles.SubPanelesLaboratorio.PanelGrafico;
+import Paneles.SubPanelesLaboratorio.PanelRegistro;
 
 public class Laboratorio extends JPanel{
     JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo;
@@ -76,7 +91,7 @@ public class Laboratorio extends JPanel{
     }
     public void cargarComponentesLab(){
         JSpinner spin; 
-        JSlider velodidad;
+        JSlider velocidad;
         JButton aleatorio,ejecutar, manual;  
         JComboBox combo; 
         JRadioButton ordenamiento,busqueda; 
@@ -116,16 +131,17 @@ public class Laboratorio extends JPanel{
 
         //Panel superior izquierdo inferior
         S4 = new JPanel(new GridLayout(3,1));
+
         ejecutar = new JButton("Ejecutar");
 
         S4.add(new JLabel("Velocidad"));
-        velodidad = new JSlider(1, 3, 1);
-        S4.add(velodidad);
+        velocidad = new JSlider(1, 3, 1);
+        S4.add(velocidad);
         S4.add(ejecutar);
         
 
         //Agregar paneles al panel superior
-        superior = new JPanel(new GridLayout(4,1));
+        superior = new JPanel(new GridLayout(3,1));
         superior.add(S1);
         superior.add(S2);
         superior.add(S4);
