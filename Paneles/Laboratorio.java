@@ -1,35 +1,15 @@
 package Paneles;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-
-import Paneles.SubPanelesLaboratorio.PanelDatos;
-import Paneles.SubPanelesLaboratorio.PanelGrafico;
-import Paneles.SubPanelesLaboratorio.PanelRegistro;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+import Excepciones.*;
+import Paneles.SubPanelesLaboratorio.*;
 
 public class Laboratorio extends JPanel implements ActionListener {
     JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo, pBuscar,superior;
-    PanelGrafico panelGrafico;
-    PanelDatos panelDatos;
-    PanelRegistro panelRegistro; 
+    PanelGrafico panelGrafico; PanelDatos panelDatos; PanelRegistro panelRegistro; 
     JButton btnEjecutar, btnAleatorio, btnManual;
     JSlider sdrVelocidad;
     JRadioButton rbOrdenamiento,rbBusqueda; 
@@ -115,6 +95,7 @@ public class Laboratorio extends JPanel implements ActionListener {
         //Panel superior izquierdo inferior (Velocidad y ejecutar)
         pInferior = new JPanel(new GridLayout(3,1));
         btnEjecutar = new JButton("Ejecutar");
+        btnEjecutar.addActionListener(this);
 
         pInferior.add(new JLabel("Velocidad"));
         sdrVelocidad = new JSlider(1, 3, 1);
@@ -148,19 +129,103 @@ public class Laboratorio extends JPanel implements ActionListener {
         if (e.getSource()== rbOrdenamiento) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosOrdenamiento));
             txtBusqueda.setEnabled(false);
+            panelRegistro.agregarRegistro("Modo cambiado a Ordenamiento", TipoRegistro.INFO);
+
         } else if (e.getSource() == rbBusqueda) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
             txtBusqueda.setEnabled(true);
+            panelRegistro.agregarRegistro("Modo cambiado a Búsqueda", TipoRegistro.INFO);
+
         } else if (e.getSource() == btnAleatorio){
-            int [] a; 
-            
+
             cantidadBarras = (int) spCantidad.getValue();
-            a = panelGrafico.generarDatosAleatorio(cantidadBarras);
-            panelDatos.desactivar(a);
+            panelDatos.marcarError(false);
+            int [] a= panelGrafico.generarDatosAleatorio(cantidadBarras);
+
+            panelRegistro.agregarRegistro(
+                    "Datos aleatorios generados (" + cantidadBarras + " valores): " + Arrays.toString(a),
+                    TipoRegistro.INFO);
+
         } else if (e.getSource() == btnManual){
-                panelDatos.activar();
+            String texto = panelDatos.getTexto();
+
+            if (texto.isEmpty()) {
+                panelDatos.marcarError(true);
+                panelRegistro.agregarRegistro(
+                        "Intento de carga manual sin datos ingresados", TipoRegistro.INFO);
+                JOptionPane.showMessageDialog(this,
+                        "Ingrese al menos un valor separado por ';' (Ej: 3;33;5;7;32).",
+                        "Datos vacíos", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try {
+                int[] datosManual = parsearDatosManuales(texto);
+                cantidadBarras = datosManual.length;
+                panelDatos.marcarError(false);
+                panelGrafico.setDatos(datosManual);
+
+                panelRegistro.agregarRegistro(
+                        "Datos manuales cargados (" + cantidadBarras + " valores): " + Arrays.toString(datosManual),
+                        TipoRegistro.INFO);
+
+            } catch (NumberFormatException ex) {
+                panelDatos.marcarError(true);
+                panelRegistro.agregarRegistro(
+                        "Error al cargar datos manuales: " + ex.getMessage(), TipoRegistro.INFO);
+                JOptionPane.showMessageDialog(this,
+                        "Formato inválido. Ingrese solo números enteros separados por ';' (Ej: 3;33;5;7;32).\n"
+                                + "Detalle: " + ex.getMessage(),
+                        "Error en los datos", JOptionPane.ERROR_MESSAGE);
+            }
         } else if (e.getSource() == btnEjecutar){
-            
+
+            int[] datosActuales = panelGrafico.getDatos();
+            if (datosActuales == null || datosActuales.length == 0) {
+                panelRegistro.agregarRegistro(
+                        "Intento de ejecución sin datos cargados", TipoRegistro.INFO);
+                JOptionPane.showMessageDialog(this,
+                        "Primero genere o ingrese datos antes de ejecutar.",
+                        "Sin datos", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            String algoritmo = (String) combo.getSelectedItem();
+            String modo = rbOrdenamiento.isSelected() ? "Ordenamiento" : "Búsqueda";
+
+            panelRegistro.agregarRegistro(
+                    "Ejecutando " + modo + " - Algoritmo: " + algoritmo
+                            + " - Velocidad: " + sdrVelocidad.getValue(),
+                    TipoRegistro.PASO);
+
+            // TODO: aquí se debe invocar la lógica real del algoritmo seleccionado
         }
+    }
+
+    private int[] parsearDatosManuales(String texto) {
+        String[] partes = texto.split(",");
+        int[] resultado = new int[partes.length];
+
+        for (int i = 0; i < partes.length; i++) {
+            String valor = partes[i].trim();
+            if (valor.isEmpty()) {
+                throw new NumberFormatException("valor vacío en la posición " + (i + 1));
+            }
+            try {
+                int numero = Integer.parseInt(valor);
+                if (numero > 50) {
+                    resultado[i] = 50;
+                    throw new ValorExcedidoException("El valor " + numero + " (posición " + (i + 1) + ") excede el máximo permitido de 50, se reemplazó por el valor máximo.");
+                } else {
+                    resultado[i] = numero;
+                }
+            } catch (NumberFormatException ex) {
+                throw new NumberFormatException("\"" + valor + "\" no es un número entero (posición " + (i + 1) + ")");
+            } catch (ValorExcedidoException ex){
+                panelRegistro.agregarRegistro(ex.getMessage(), TipoRegistro.INFO);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Valor Excedido", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        return resultado;
     }
 }
