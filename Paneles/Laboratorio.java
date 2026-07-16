@@ -134,11 +134,6 @@ public class Laboratorio extends JPanel implements ActionListener {
         } else if (e.getSource() == btnAleatorio){
             cantidadBarras = (int) spCantidad.getValue();
             panelDatos.marcarError(false);
-            int [] a= panelGrafico.generarDatosAleatorio(cantidadBarras);
-            for (int i : a) {
-                System.out.print(i+" ");
-            }
-            System.out.println(" ");
         } else if (e.getSource() == btnManual){
             String texto = panelDatos.getTexto();
 

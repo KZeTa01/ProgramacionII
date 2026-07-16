@@ -6,7 +6,6 @@ import java.awt.*;
 public class PanelGrafico extends JPanel {
 
     private int[] datos;
-    private String lineaDatos;
     private final PanelBarras panelBarras;
     private final JScrollPane scrollPane;
 
@@ -55,6 +54,19 @@ public class PanelGrafico extends JPanel {
     private void actualizarGrafico() {
         panelBarras.setDatos(datos);
     }
+
+    private String convertirDatosString(){
+        String linea="";
+        for(int i =0; i < datos.length; i++ ){
+            if (i==datos.length-1) {
+                linea=linea+i;
+            }
+            else {
+                linea=linea+i+";";
+            }
+        }
+        return linea;
+    } 
 
     /**
      * Panel interno encargado únicamente de dibujar las barras.
