@@ -1,12 +1,23 @@
 package Paneles;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
+import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
-import java.util.ArrayList;
-import java.util.List;
  
  
 public class Interativo extends JPanel{
@@ -62,6 +73,30 @@ public class Interativo extends JPanel{
     }
 
     private JButton crearBotonReiniciar() {
-        return;
+        JButton boton = new JButton("🔄 Reiniciar");
+        boton.setFocusPainted(false);
+        boton.setForeground(new Color(76, 81, 191));
+        boton.setBackground(Color.WHITE);
+        boton.setFont(new Font("SansSerif", Font.BOLD, 12));
+        boton.setBorder(new EmptyBorder(8, 16, 8, 16));
+        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        boton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                boton.setBackground(new Color(235, 235, 250));
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                boton.setBackground(Color.WHITE);
+            }
+        });
+        boton.addActionListener(e -> reiniciarTodo());
+        return boton;
+    }
+
+    private void reiniciarTodo() {
+        // Aquí se implementaría la lógica para reiniciar el panel interactivo
+        // Por ejemplo, limpiar el panelDestino y devolver las figuras al panelBanco
+        System.out.println("Reiniciando el panel interactivo...");
     }
 }
