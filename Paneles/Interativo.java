@@ -244,5 +244,50 @@ public class Interativo extends JPanel{
                 }
             };
         }
+
+        private void iniciarPulso() {
+            if (timerPulso != null && timerPulso.isRunning()) {
+                timerPulso.stop();
+            }
+            pulso = 1f;
+            timerPulso = new Timer(30, null);
+            timerPulso.addActionListener(ev -> {
+                pulso -= 0.12f;
+                if (pulso <= 0f) {
+                    pulso = 0f;
+                    timerPulso.stop();
+                }
+                repaint();
+            });
+            timerPulso.start();
+        }
+
+        private void reubicarEnDestino(Point puntoEnDestino) {
+            panelBanco.remove(Figura.this);
+            panelBanco.revalidate();
+            panelBanco.repaint();
+ 
+            panelDestino.add(Figura.this);
+ 
+            // Aparece pegada al mouse; recién se acomoda en la línea base al soltar.
+            Point libre = limitarLibre(
+                    puntoEnDestino.x - offset.x,
+                    puntoEnDestino.y - offset.y);
+            setLocation(libre.x, libre.y);
+            ultimaX = libre.x;
+ 
+            panelDestino.revalidate();
+            panelDestino.repaint();
+        }
+
+        private Point limitarLibre(int x, int y) {
+            int maxX = Math.max(panelDestino.getWidth() - getWidth(), 0);
+            int maxY = Math.max(panelDestino.getHeight() - getHeight(), 0);
+ 
+            int nX = Math.max(0, Math.min(x, maxX));
+            int nY = Math.max(0, Math.min(y, maxY));
+ 
+            return new Point(nX, nY);
+        }
     }
 }
