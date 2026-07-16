@@ -11,6 +11,8 @@ public class PanelDatos extends JPanel implements FocusListener{
     public JTextField getCaja(){
         return caja; 
     }
+    
+
     public void desactivar(int[] valores){
         caja.setEnabled(false);
         StringBuilder sb = new StringBuilder();
@@ -28,8 +30,7 @@ public class PanelDatos extends JPanel implements FocusListener{
     public void activar(){
         caja.setEnabled(true);
         caja.setForeground(Color.BLUE);
-        caja.setText(texto);
-        caja.setForeground(Color.GRAY); 
+
         
     }
     public PanelDatos() {

@@ -55,19 +55,6 @@ public class PanelGrafico extends JPanel {
         panelBarras.setDatos(datos);
     }
 
-    private String convertirDatosString(){
-        String linea="";
-        for(int i =0; i < datos.length; i++ ){
-            if (i==datos.length-1) {
-                linea=linea+i;
-            }
-            else {
-                linea=linea+i+";";
-            }
-        }
-        return linea;
-    } 
-
     /**
      * Panel interno encargado únicamente de dibujar las barras.
      * Implementa Scrollable para que, cuando la cantidad de barras no quepa

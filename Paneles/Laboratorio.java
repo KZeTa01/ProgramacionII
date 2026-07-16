@@ -59,6 +59,7 @@ public class Laboratorio extends JPanel implements ActionListener {
     public void cargarComponentesLab(){
         ButtonGroup grupoBotones; 
         JPanel pModos,pDatos,pInferior;
+
         //PRIMER PANEL(Panel de modos)
         pModos =new JPanel(new GridLayout(3,1,10,10));
         pModos.setBorder(BorderFactory.createTitledBorder("Algoritmo")); 
@@ -88,7 +89,7 @@ public class Laboratorio extends JPanel implements ActionListener {
         btnAleatorio.addActionListener(this);
         btnManual = new JButton("Manual");
         btnManual.addActionListener(this);
-        spCantidad = new JSpinner(new SpinnerNumberModel(5, 5, 100, 1));
+        spCantidad = new JSpinner(new SpinnerNumberModel(5, 5, 40, 1));
         
         pDatos.add(btnAleatorio); pDatos.add(btnManual); pDatos.add(spCantidad); 
 
@@ -132,9 +133,14 @@ public class Laboratorio extends JPanel implements ActionListener {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
             txtBusqueda.setEnabled(true);
         } else if (e.getSource() == btnAleatorio){
+            int[] a; 
             cantidadBarras = (int) spCantidad.getValue();
             panelDatos.marcarError(false);
+            a = panelGrafico.generarDatosAleatorio(cantidadBarras);
+            panelDatos.desactivar(a);
         } else if (e.getSource() == btnManual){
+            
+            panelDatos.activar();
             String texto = panelDatos.getTexto();
 
             if (texto.isEmpty()) {
@@ -146,7 +152,17 @@ public class Laboratorio extends JPanel implements ActionListener {
             }
 
             try {
+                int cantidadEsperada = (int) spCantidad.getValue();
                 int[] datosManual = parsearDatosManuales(texto);
+
+                if (datosManual.length != cantidadEsperada) {
+                    panelDatos.marcarError(true);
+                    JOptionPane.showMessageDialog(this,
+                            "Debe ingresar exactamente " + cantidadEsperada + " valor(es) para coincidir con la cantidad de barras.",
+                            "Cantidad de datos incorrecta", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
                 cantidadBarras = datosManual.length;
                 panelDatos.marcarError(false);
                 panelGrafico.setDatos(datosManual);
