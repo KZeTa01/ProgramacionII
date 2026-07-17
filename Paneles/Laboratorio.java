@@ -1,5 +1,6 @@
 package Paneles;
 
+<<<<<<< HEAD
 import javax.swing.*;
 
 import Excepciones.*;
@@ -13,6 +14,35 @@ import java.util.Iterator;
 import java.util.List;
 
 import Paneles.SubPanelesLaboratorio.*;
+=======
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+
+import Excepciones.ValorExcedidoException;
+import Paneles.SubPanelesLaboratorio.PanelDatos;
+import Paneles.SubPanelesLaboratorio.PanelGrafico;
+import Paneles.SubPanelesLaboratorio.PanelRegistro;
+>>>>>>> 088d08be67d31071c0511d9b1b495fff22c11d84
 import Paneles.SubPanelesLaboratorio.PanelRegistro.TipoRegistro;
 
 public class Laboratorio extends JPanel implements ActionListener {

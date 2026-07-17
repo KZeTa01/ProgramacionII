@@ -88,3 +88,7 @@
 (18:04:03) [PASO] Comparando posición 4 (43) con el menor actual, posición 3 (32)
 (18:04:03) [INFO] Posición 3 quedó ordenada
 (18:04:04) [INFO] Ordenamiento por Selección finalizado
+(09:34:16) [INFO] Intento de carga manual sin datos ingresados
+(09:34:21) [INFO] Modo cambiado a Búsqueda
+(09:34:24) [INFO] Datos aleatorios generados (5 valores): [16, 45, 18, 3, 2]
+(09:34:31) [PASO] Ejecutando Búsqueda - Algoritmo: Secuencial - Velocidad: 1
