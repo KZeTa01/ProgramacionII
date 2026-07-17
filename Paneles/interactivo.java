@@ -1,58 +1,30 @@
 package Paneles;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Composite;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridBagLayout;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.RoundRectangle2D;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
  
+public class interactivo extends JPanel {
  
-public class Interativo extends JPanel{
     private JPanel panelBanco;      // Caja pequeña con las figuras disponibles
     private JPanel panelDestino;    // Caja grande donde se colocan las figuras
     private JLabel estadoLabel;     // Muestra cuántas figuras se han colocado
-    
-    public Interativo() {
+    private static final int TOTAL_FIGURAS = 5;
+ 
+    public interactivo() {
         configurarPanel();
+        cargarFigurasIniciales();
     }
-
+ 
     public void configurarPanel() {
         setLayout(new BorderLayout());
         setBackground(new Color(235, 238, 245));
-
+ 
+        // ===== Encabezado con degradado =====
         JPanel encabezado = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -64,7 +36,6 @@ public class Interativo extends JPanel{
                 g2.dispose();
             }
         };
-
         encabezado.setPreferredSize(new Dimension(0, 70));
         encabezado.setBorder(new EmptyBorder(10, 20, 10, 20));
  
@@ -90,7 +61,7 @@ public class Interativo extends JPanel{
         encabezado.add(wrapperBoton, BorderLayout.EAST);
  
         add(encabezado, BorderLayout.NORTH);
-
+ 
         // ===== Panel central: banco + destino =====
         JPanel centro = new JPanel(new BorderLayout());
         centro.setOpaque(false);
@@ -139,17 +110,26 @@ public class Interativo extends JPanel{
         panelDestino.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                
+                reacomodarEnLimites();
             }
         });
  
         centro.add(panelDestino, BorderLayout.CENTER);
         add(centro, BorderLayout.CENTER);
-
-        
-
+ 
+        // ===== Barra de estado =====
+        JPanel barraEstado = new JPanel(new BorderLayout());
+        barraEstado.setBackground(new Color(245, 246, 250));
+        barraEstado.setBorder(new EmptyBorder(8, 20, 8, 20));
+        estadoLabel = new JLabel();
+        estadoLabel.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        estadoLabel.setForeground(new Color(90, 90, 110));
+        barraEstado.add(estadoLabel, BorderLayout.WEST);
+        add(barraEstado, BorderLayout.SOUTH);
+ 
+        actualizarEstado();
     }
-
+ 
     private JButton crearBotonReiniciar() {
         JButton boton = new JButton("🔄 Reiniciar");
         boton.setFocusPainted(false);
@@ -171,7 +151,31 @@ public class Interativo extends JPanel{
         boton.addActionListener(e -> reiniciarTodo());
         return boton;
     }
-
+ 
+    // Crea algunas figuras de ejemplo dentro del banco, cada una con una forma distinta
+    private void cargarFigurasIniciales() {
+        Color[] colores = {
+                new Color(231, 76, 60),
+                new Color(52, 152, 219),
+                new Color(46, 204, 113),
+                new Color(230, 126, 34),
+                new Color(155, 89, 182)
+        };
+        TipoForma[] formas = TipoForma.values();
+        for (int i = 0; i < colores.length; i++) {
+            Figura figura = new Figura(colores[i], "F" + (i + 1), formas[i % formas.length]);
+            panelBanco.add(figura);
+        }
+        panelBanco.revalidate();
+        panelBanco.repaint();
+    }
+ 
+    private void actualizarEstado() {
+        int colocadas = panelDestino.getComponentCount();
+        estadoLabel.setText("Figuras colocadas: " + colocadas + " / " + TOTAL_FIGURAS
+                + (colocadas == TOTAL_FIGURAS ? "   ✅ ¡Completado!" : ""));
+    }
+ 
     private void reiniciarTodo() {
         List<Component> actuales = new ArrayList<>();
         for (Component c : panelDestino.getComponents()) {
@@ -187,12 +191,21 @@ public class Interativo extends JPanel{
         panelDestino.repaint();
         actualizarEstado();
     }
-
-    private void actualizarEstado() {
-        
+ 
+    // Reacomoda las figuras dentro de los nuevos límites cuando la ventana cambia de tamaño
+    private void reacomodarEnLimites() {
+        for (Component c : panelDestino.getComponents()) {
+            int maxX = Math.max(panelDestino.getWidth() - c.getWidth(), 0);
+            int lineaBase = Math.max(panelDestino.getHeight() - c.getHeight(), 0);
+            int nx = Math.max(0, Math.min(c.getX(), maxX));
+            c.setLocation(nx, lineaBase);
+        }
+        panelDestino.repaint();
     }
-
+ 
     private enum TipoForma { CIRCULO, CUADRADO, TRIANGULO, ESTRELLA, HEXAGONO }
+ 
+    // ==========================================================
     // Clase interna: representa una figura arrastrable y personalizada
     // ==========================================================
     private class Figura extends JComponent {
@@ -218,42 +231,73 @@ public class Interativo extends JPanel{
             addMouseListener(listenerArrastre);
             addMouseMotionListener(listenerArrastre);
         }
-
+ 
         private MouseAdapter crearListenerArrastre() {
             return new MouseAdapter() {
  
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    
+                    offset = e.getPoint();
+                    arrastrando = true;
+                    repaint();
                 }
  
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    
+                    arrastrando = false;
+                    if (getParent() == panelDestino) {
+                        aterrizarEnLineaBase();
+                        iniciarPulso();
+                        actualizarEstado();
+                    }
+                    repaint();
                 }
  
                 @Override
                 public void mouseEntered(MouseEvent e) {
-                    
+                    hover = true;
+                    repaint();
                 }
  
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    
+                    hover = false;
+                    repaint();
                 }
  
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    
+                    if (e.getClickCount() == 2 && getParent() == panelDestino) {
+                        panelDestino.remove(Figura.this);
+                        panelBanco.add(Figura.this);
+                        panelBanco.revalidate();
+                        panelBanco.repaint();
+                        panelDestino.revalidate();
+                        panelDestino.repaint();
+                        actualizarEstado();
+                    }
                 }
  
                 @Override
                 public void mouseDragged(MouseEvent e) {
-                    
+                    Point puntoEnDestino = SwingUtilities.convertPoint(
+                            Figura.this, e.getPoint(), panelDestino);
+ 
+                    if (getParent() != panelDestino) {
+                        reubicarEnDestino(puntoEnDestino);
+                    } else {
+                        // Sigue al mouse libremente (en X y en Y) mientras se arrastra;
+                        // recién al soltar el mouse se "cae" hacia la línea base.
+                        Point libre = limitarLibre(
+                                puntoEnDestino.x - offset.x,
+                                puntoEnDestino.y - offset.y);
+                        setLocation(libre.x, libre.y);
+                        ultimaX = libre.x;
+                    }
                 }
             };
         }
-
+ 
         private void iniciarPulso() {
             if (timerPulso != null && timerPulso.isRunning()) {
                 timerPulso.stop();
@@ -270,7 +314,7 @@ public class Interativo extends JPanel{
             });
             timerPulso.start();
         }
-
+ 
         private void reubicarEnDestino(Point puntoEnDestino) {
             panelBanco.remove(Figura.this);
             panelBanco.revalidate();
@@ -288,7 +332,8 @@ public class Interativo extends JPanel{
             panelDestino.revalidate();
             panelDestino.repaint();
         }
-
+ 
+        // Deja que la figura se mueva libremente (X e Y) dentro de los límites del área de trabajo
         private Point limitarLibre(int x, int y) {
             int maxX = Math.max(panelDestino.getWidth() - getWidth(), 0);
             int maxY = Math.max(panelDestino.getHeight() - getHeight(), 0);
@@ -298,7 +343,9 @@ public class Interativo extends JPanel{
  
             return new Point(nX, nY);
         }
-
+ 
+        // Al soltar el mouse, la figura "cae" hacia la línea base del área de trabajo,
+        // esquivando otras figuras si hace falta.
         private void aterrizarEnLineaBase() {
             int lineaBase = Math.max(panelDestino.getHeight() - getHeight(), 0);
             int x = getX();
@@ -310,7 +357,7 @@ public class Interativo extends JPanel{
             setLocation(x, lineaBase);
             ultimaX = x;
         }
-
+ 
         private boolean sobrePosicion(int x, int y) {
             Rectangle propuesto = new Rectangle(x, y, getWidth(), getHeight());
  
@@ -324,7 +371,7 @@ public class Interativo extends JPanel{
             }
             return false;
         }
-
+ 
         private Point buscarPosicionLibre(int y) {
             int maxX = panelDestino.getWidth() - getWidth();
             maxX = Math.max(maxX, 0);
@@ -336,7 +383,9 @@ public class Interativo extends JPanel{
             }
             return new Point(0, y);
         }
-
+ 
+        // ===== Dibujo personalizado de la figura =====
+        @Override
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
