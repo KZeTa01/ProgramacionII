@@ -1,23 +1,32 @@
 package Paneles;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Composite;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.Point;
+import java.awt.Polygon;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -288,6 +297,142 @@ public class Interativo extends JPanel{
             int nY = Math.max(0, Math.min(y, maxY));
  
             return new Point(nX, nY);
+        }
+
+        private void aterrizarEnLineaBase() {
+            int lineaBase = Math.max(panelDestino.getHeight() - getHeight(), 0);
+            int x = getX();
+ 
+            if (sobrePosicion(x, lineaBase)) {
+                Point libre = buscarPosicionLibre(lineaBase);
+                x = libre.x;
+            }
+            setLocation(x, lineaBase);
+            ultimaX = x;
+        }
+
+        private boolean sobrePosicion(int x, int y) {
+            Rectangle propuesto = new Rectangle(x, y, getWidth(), getHeight());
+ 
+            for (Component comp : panelDestino.getComponents()) {
+                if (comp == Figura.this) continue;
+ 
+                Rectangle otro = comp.getBounds();
+                if (propuesto.intersects(otro)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private Point buscarPosicionLibre(int y) {
+            int maxX = panelDestino.getWidth() - getWidth();
+            maxX = Math.max(maxX, 0);
+ 
+            for (int x = 0; x <= maxX; x += 5) {
+                if (!sobrePosicion(x, y)) {
+                    return new Point(x, y);
+                }
+            }
+            return new Point(0, y);
+        }
+
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g.create();
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+ 
+            int w = getWidth();
+            int h = getHeight();
+            int formaAncho = w - 20;
+            int formaAlto = h - 30;
+            int offX = 10;
+            int offY = 5;
+ 
+            Shape forma = crearForma(tipoForma, offX, offY, formaAncho, formaAlto);
+ 
+            // Sombra (más grande si se está arrastrando, simulando elevación)
+            int sombraOffset = arrastrando ? 8 : 3;
+            g2.setColor(new Color(0, 0, 0, arrastrando ? 60 : 35));
+            AffineTransform sombraT = AffineTransform.getTranslateInstance(sombraOffset, sombraOffset);
+            g2.fill(sombraT.createTransformedShape(forma));
+ 
+            // Anillo de pulso al aterrizar
+            if (pulso > 0f) {
+                g2.setColor(new Color(colorBase.getRed(), colorBase.getGreen(), colorBase.getBlue(),
+                        (int) (120 * pulso)));
+                g2.setStroke(new BasicStroke(3f));
+                double expansion = 10 * pulso;
+                Shape anillo = AffineTransform.getScaleInstance(
+                        1 + expansion / formaAncho, 1 + expansion / formaAlto)
+                        .createTransformedShape(forma);
+                g2.draw(anillo);
+            }
+ 
+            // Relleno con degradado
+            Color claro = colorBase.brighter();
+            Color oscuro = colorBase.darker();
+            GradientPaint gp = new GradientPaint(offX, offY, claro, offX + formaAncho, offY + formaAlto, oscuro);
+            g2.setPaint(gp);
+ 
+            float alpha = arrastrando ? 0.75f : 1f;
+            Composite compositeOriginal = g2.getComposite();
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+            g2.fill(forma);
+ 
+            // Borde (más grueso al pasar el mouse)
+            g2.setColor(hover ? Color.WHITE : new Color(60, 60, 70));
+            g2.setStroke(new BasicStroke(hover ? 3f : 1.5f));
+            g2.draw(forma);
+            g2.setComposite(compositeOriginal);
+ 
+            // Texto centrado
+            g2.setFont(new Font("SansSerif", Font.BOLD, 14));
+            g2.setColor(Color.WHITE);
+            FontMetrics fm = g2.getFontMetrics();
+            int tx = w / 2 - fm.stringWidth(texto) / 2;
+            int ty = offY + formaAlto / 2 + fm.getAscent() / 2 - 2;
+            g2.drawString(texto, tx, ty);
+ 
+            g2.dispose();
+        }
+ 
+        private Shape crearForma(TipoForma tipo, int x, int y, int w, int h) {
+            switch (tipo) {
+                case CIRCULO:
+                    return new Ellipse2D.Double(x, y, w, h);
+                case CUADRADO:
+                    return new RoundRectangle2D.Double(x, y, w, h, 14, 14);
+                case TRIANGULO: {
+                    Polygon p = new Polygon();
+                    p.addPoint(x + w / 2, y);
+                    p.addPoint(x + w, y + h);
+                    p.addPoint(x, y + h);
+                    return p;
+                }
+                case HEXAGONO: {
+                    Polygon p = new Polygon();
+                    int cx = x + w / 2, cy = y + h / 2;
+                    for (int i = 0; i < 6; i++) {
+                        double ang = Math.PI / 3 * i - Math.PI / 2;
+                        p.addPoint((int) (cx + (w / 2.0) * Math.cos(ang)),
+                                   (int) (cy + (h / 2.0) * Math.sin(ang)));
+                    }
+                    return p;
+                }
+                case ESTRELLA:
+                default: {
+                    Polygon p = new Polygon();
+                    int cx = x + w / 2, cy = y + h / 2;
+                    double rExt = Math.min(w, h) / 2.0;
+                    double rInt = rExt * 0.45;
+                    for (int i = 0; i < 10; i++) {
+                        double ang = Math.PI / 5 * i - Math.PI / 2;
+                        double r = (i % 2 == 0) ? rExt : rInt;
+                        p.addPoint((int) (cx + r * Math.cos(ang)), (int) (cy + r * Math.sin(ang)));
+                    }
+                    return p;
+                }
+            }
         }
     }
 }
