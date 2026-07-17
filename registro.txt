@@ -92,3 +92,413 @@
 (09:34:21) [INFO] Modo cambiado a Búsqueda
 (09:34:24) [INFO] Datos aleatorios generados (5 valores): [16, 45, 18, 3, 2]
 (09:34:31) [PASO] Ejecutando Búsqueda - Algoritmo: Secuencial - Velocidad: 1
+(10:35:45) [INFO] Datos aleatorios generados (5 valores): [49, 39, 28, 48, 43]
+
+(10:35:46) [INFO] Iniciando ordenamiento por Selección
+(10:35:46) [PASO] Ejecutando Ordenamiento - Algoritmo: Selección - Velocidad: 1
+(10:35:47) [PASO] Comparando posición 1 (39) con el menor actual, posición 0 (49)
+(10:35:48) [PASO] Comparando posición 2 (28) con el menor actual, posición 1 (39)
+(10:35:48) [PASO] Comparando posición 3 (48) con el menor actual, posición 2 (28)
+(10:35:49) [PASO] Comparando posición 4 (43) con el menor actual, posición 2 (28)
+(10:35:50) [SWAP] Intercambiando posiciones 0 y 2
+(10:35:50) [INFO] Posición 0 quedó ordenada
+(10:35:51) [PASO] Comparando posición 2 (49) con el menor actual, posición 1 (39)
+(10:35:52) [PASO] Comparando posición 3 (48) con el menor actual, posición 1 (39)
+(10:35:52) [PASO] Comparando posición 4 (43) con el menor actual, posición 1 (39)
+(10:35:53) [INFO] Posición 1 quedó ordenada
+(10:35:54) [PASO] Comparando posición 3 (48) con el menor actual, posición 2 (49)
+(10:35:55) [PASO] Comparando posición 4 (43) con el menor actual, posición 3 (48)
+(10:35:55) [SWAP] Intercambiando posiciones 2 y 4
+(10:35:56) [INFO] Posición 2 quedó ordenada
+(10:35:57) [PASO] Comparando posición 4 (49) con el menor actual, posición 3 (48)
+(10:35:57) [INFO] Posición 3 quedó ordenada
+(10:35:58) [INFO] Ordenamiento por Selección finalizado
+(10:36:03) [INFO] Datos aleatorios generados (5 valores): [43, 43, 12, 11, 19]
+(10:36:03) [INFO] Datos aleatorios generados (5 valores): [46, 27, 19, 37, 43]
+(10:36:04) [INFO] Datos aleatorios generados (5 valores): [33, 20, 15, 13, 31]
+(10:36:08) [INFO] Datos aleatorios generados (9 valores): [12, 6, 39, 2, 35, 17, 49, 2, 31]
+
+(10:36:09) [INFO] Iniciando ordenamiento por Selección
+(10:36:09) [PASO] Ejecutando Ordenamiento - Algoritmo: Selección - Velocidad: 1
+(10:36:10) [PASO] Comparando posición 1 (6) con el menor actual, posición 0 (12)
+(10:36:10) [PASO] Comparando posición 2 (39) con el menor actual, posición 1 (6)
+(10:36:11) [PASO] Comparando posición 3 (2) con el menor actual, posición 1 (6)
+(10:36:12) [PASO] Comparando posición 4 (35) con el menor actual, posición 3 (2)
+(10:36:12) [PASO] Comparando posición 5 (17) con el menor actual, posición 3 (2)
+(10:36:13) [PASO] Comparando posición 6 (49) con el menor actual, posición 3 (2)
+(10:36:14) [PASO] Comparando posición 7 (2) con el menor actual, posición 3 (2)
+(10:36:15) [PASO] Comparando posición 8 (31) con el menor actual, posición 3 (2)
+(10:36:15) [SWAP] Intercambiando posiciones 0 y 3
+(10:36:16) [INFO] Posición 0 quedó ordenada
+(10:36:17) [PASO] Comparando posición 2 (39) con el menor actual, posición 1 (6)
+(10:36:17) [PASO] Comparando posición 3 (12) con el menor actual, posición 1 (6)
+(10:36:18) [PASO] Comparando posición 4 (35) con el menor actual, posición 1 (6)
+(10:36:19) [PASO] Comparando posición 5 (17) con el menor actual, posición 1 (6)
+(10:36:19) [PASO] Comparando posición 6 (49) con el menor actual, posición 1 (6)
+(10:36:20) [PASO] Comparando posición 7 (2) con el menor actual, posición 1 (6)
+(10:36:21) [PASO] Comparando posición 8 (31) con el menor actual, posición 7 (2)
+(10:36:22) [SWAP] Intercambiando posiciones 1 y 7
+(10:36:22) [INFO] Posición 1 quedó ordenada
+(10:36:23) [PASO] Comparando posición 3 (12) con el menor actual, posición 2 (39)
+(10:36:24) [PASO] Comparando posición 4 (35) con el menor actual, posición 3 (12)
+(10:36:24) [PASO] Comparando posición 5 (17) con el menor actual, posición 3 (12)
+(10:36:25) [PASO] Comparando posición 6 (49) con el menor actual, posición 3 (12)
+(10:36:26) [PASO] Comparando posición 7 (6) con el menor actual, posición 3 (12)
+(10:36:26) [PASO] Comparando posición 8 (31) con el menor actual, posición 7 (6)
+(10:36:27) [SWAP] Intercambiando posiciones 2 y 7
+(10:36:28) [INFO] Posición 2 quedó ordenada
+(10:36:29) [PASO] Comparando posición 4 (35) con el menor actual, posición 3 (12)
+(10:36:29) [PASO] Comparando posición 5 (17) con el menor actual, posición 3 (12)
+(10:36:30) [PASO] Comparando posición 6 (49) con el menor actual, posición 3 (12)
+(10:36:31) [PASO] Comparando posición 7 (39) con el menor actual, posición 3 (12)
+(10:36:31) [PASO] Comparando posición 8 (31) con el menor actual, posición 3 (12)
+(10:36:32) [INFO] Posición 3 quedó ordenada
+(10:36:33) [PASO] Comparando posición 5 (17) con el menor actual, posición 4 (35)
+(10:36:33) [PASO] Comparando posición 6 (49) con el menor actual, posición 5 (17)
+(10:36:34) [PASO] Comparando posición 7 (39) con el menor actual, posición 5 (17)
+(10:36:35) [PASO] Comparando posición 8 (31) con el menor actual, posición 5 (17)
+(10:36:36) [SWAP] Intercambiando posiciones 4 y 5
+(10:36:36) [INFO] Posición 4 quedó ordenada
+(10:36:37) [PASO] Comparando posición 6 (49) con el menor actual, posición 5 (35)
+(10:36:38) [PASO] Comparando posición 7 (39) con el menor actual, posición 5 (35)
+(10:36:38) [PASO] Comparando posición 8 (31) con el menor actual, posición 5 (35)
+(10:36:39) [SWAP] Intercambiando posiciones 5 y 8
+(10:36:40) [INFO] Posición 5 quedó ordenada
+(10:36:40) [PASO] Comparando posición 7 (39) con el menor actual, posición 6 (49)
+(10:36:41) [PASO] Comparando posición 8 (35) con el menor actual, posición 7 (39)
+(10:36:42) [SWAP] Intercambiando posiciones 6 y 8
+(10:36:43) [INFO] Posición 6 quedó ordenada
+(10:36:43) [PASO] Comparando posición 8 (49) con el menor actual, posición 7 (39)
+(10:36:44) [INFO] Posición 7 quedó ordenada
+(10:36:45) [INFO] Ordenamiento por Selección finalizado
+(10:36:51) [INFO] Datos aleatorios generados (9 valores): [23, 38, 22, 6, 8, 19, 14, 49, 16]
+
+(10:36:52) [INFO] Iniciando ordenamiento por Selección
+(10:36:52) [PASO] Ejecutando Ordenamiento - Algoritmo: Selección - Velocidad: 3
+(10:36:52) [PASO] Comparando posición 1 (38) con el menor actual, posición 0 (23)
+(10:36:52) [PASO] Comparando posición 2 (22) con el menor actual, posición 0 (23)
+(10:36:52) [PASO] Comparando posición 3 (6) con el menor actual, posición 2 (22)
+(10:36:52) [PASO] Comparando posición 4 (8) con el menor actual, posición 3 (6)
+(10:36:53) [PASO] Comparando posición 5 (19) con el menor actual, posición 3 (6)
+(10:36:53) [PASO] Comparando posición 6 (14) con el menor actual, posición 3 (6)
+(10:36:53) [PASO] Comparando posición 7 (49) con el menor actual, posición 3 (6)
+(10:36:53) [PASO] Comparando posición 8 (16) con el menor actual, posición 3 (6)
+(10:36:53) [SWAP] Intercambiando posiciones 0 y 3
+(10:36:53) [INFO] Posición 0 quedó ordenada
+(10:36:53) [PASO] Comparando posición 2 (22) con el menor actual, posición 1 (38)
+(10:36:53) [PASO] Comparando posición 3 (23) con el menor actual, posición 2 (22)
+(10:36:54) [PASO] Comparando posición 4 (8) con el menor actual, posición 2 (22)
+(10:36:54) [PASO] Comparando posición 5 (19) con el menor actual, posición 4 (8)
+(10:36:54) [PASO] Comparando posición 6 (14) con el menor actual, posición 4 (8)
+(10:36:54) [PASO] Comparando posición 7 (49) con el menor actual, posición 4 (8)
+(10:36:54) [PASO] Comparando posición 8 (16) con el menor actual, posición 4 (8)
+(10:36:54) [SWAP] Intercambiando posiciones 1 y 4
+(10:36:54) [INFO] Posición 1 quedó ordenada
+(10:36:55) [PASO] Comparando posición 3 (23) con el menor actual, posición 2 (22)
+(10:36:55) [PASO] Comparando posición 4 (38) con el menor actual, posición 2 (22)
+(10:36:55) [PASO] Comparando posición 5 (19) con el menor actual, posición 2 (22)
+(10:36:55) [PASO] Comparando posición 6 (14) con el menor actual, posición 5 (19)
+(10:36:55) [PASO] Comparando posición 7 (49) con el menor actual, posición 6 (14)
+(10:36:55) [PASO] Comparando posición 8 (16) con el menor actual, posición 6 (14)
+(10:36:55) [SWAP] Intercambiando posiciones 2 y 6
+(10:36:55) [INFO] Posición 2 quedó ordenada
+(10:36:56) [PASO] Comparando posición 4 (38) con el menor actual, posición 3 (23)
+(10:36:56) [PASO] Comparando posición 5 (19) con el menor actual, posición 3 (23)
+(10:36:56) [PASO] Comparando posición 6 (22) con el menor actual, posición 5 (19)
+(10:36:56) [PASO] Comparando posición 7 (49) con el menor actual, posición 5 (19)
+(10:36:56) [PASO] Comparando posición 8 (16) con el menor actual, posición 5 (19)
+(10:36:56) [SWAP] Intercambiando posiciones 3 y 8
+(10:36:56) [INFO] Posición 3 quedó ordenada
+(10:36:57) [PASO] Comparando posición 5 (19) con el menor actual, posición 4 (38)
+(10:36:57) [PASO] Comparando posición 6 (22) con el menor actual, posición 5 (19)
+(10:36:57) [PASO] Comparando posición 7 (49) con el menor actual, posición 5 (19)
+(10:36:57) [PASO] Comparando posición 8 (23) con el menor actual, posición 5 (19)
+(10:36:57) [SWAP] Intercambiando posiciones 4 y 5
+(10:36:57) [INFO] Posición 4 quedó ordenada
+(10:36:57) [PASO] Comparando posición 6 (22) con el menor actual, posición 5 (38)
+(10:36:57) [PASO] Comparando posición 7 (49) con el menor actual, posición 6 (22)
+(10:36:58) [PASO] Comparando posición 8 (23) con el menor actual, posición 6 (22)
+(10:36:58) [SWAP] Intercambiando posiciones 5 y 6
+(10:36:58) [INFO] Posición 5 quedó ordenada
+(10:36:58) [PASO] Comparando posición 7 (49) con el menor actual, posición 6 (38)
+(10:36:58) [PASO] Comparando posición 8 (23) con el menor actual, posición 6 (38)
+(10:36:58) [SWAP] Intercambiando posiciones 6 y 8
+(10:36:58) [INFO] Posición 6 quedó ordenada
+(10:36:58) [PASO] Comparando posición 8 (38) con el menor actual, posición 7 (49)
+(10:36:59) [SWAP] Intercambiando posiciones 7 y 8
+(10:36:59) [INFO] Posición 7 quedó ordenada
+(10:36:59) [INFO] Ordenamiento por Selección finalizado
+
+(10:37:03) [INFO] Iniciando ordenamiento por Selección
+(10:37:03) [PASO] Ejecutando Ordenamiento - Algoritmo: Selección - Velocidad: 3
+(10:37:03) [PASO] Comparando posición 1 (8) con el menor actual, posición 0 (6)
+(10:37:03) [PASO] Comparando posición 2 (14) con el menor actual, posición 0 (6)
+(10:37:03) [PASO] Comparando posición 3 (16) con el menor actual, posición 0 (6)
+(10:37:03) [PASO] Comparando posición 4 (19) con el menor actual, posición 0 (6)
+(10:37:03) [PASO] Comparando posición 5 (22) con el menor actual, posición 0 (6)
+(10:37:03) [PASO] Comparando posición 6 (23) con el menor actual, posición 0 (6)
+(10:37:04) [PASO] Comparando posición 7 (38) con el menor actual, posición 0 (6)
+(10:37:04) [PASO] Comparando posición 8 (49) con el menor actual, posición 0 (6)
+(10:37:04) [INFO] Posición 0 quedó ordenada
+(10:37:04) [PASO] Comparando posición 2 (14) con el menor actual, posición 1 (8)
+(10:37:04) [PASO] Comparando posición 3 (16) con el menor actual, posición 1 (8)
+(10:37:04) [PASO] Comparando posición 4 (19) con el menor actual, posición 1 (8)
+(10:37:04) [PASO] Comparando posición 5 (22) con el menor actual, posición 1 (8)
+(10:37:05) [PASO] Comparando posición 6 (23) con el menor actual, posición 1 (8)
+(10:37:05) [PASO] Comparando posición 7 (38) con el menor actual, posición 1 (8)
+(10:37:05) [PASO] Comparando posición 8 (49) con el menor actual, posición 1 (8)
+(10:37:05) [INFO] Posición 1 quedó ordenada
+(10:37:05) [PASO] Comparando posición 3 (16) con el menor actual, posición 2 (14)
+(10:37:05) [PASO] Comparando posición 4 (19) con el menor actual, posición 2 (14)
+(10:37:05) [PASO] Comparando posición 5 (22) con el menor actual, posición 2 (14)
+(10:37:05) [PASO] Comparando posición 6 (23) con el menor actual, posición 2 (14)
+(10:37:06) [PASO] Comparando posición 7 (38) con el menor actual, posición 2 (14)
+(10:37:06) [PASO] Comparando posición 8 (49) con el menor actual, posición 2 (14)
+(10:37:06) [INFO] Posición 2 quedó ordenada
+(10:37:06) [PASO] Comparando posición 4 (19) con el menor actual, posición 3 (16)
+(10:37:06) [PASO] Comparando posición 5 (22) con el menor actual, posición 3 (16)
+(10:37:06) [PASO] Comparando posición 6 (23) con el menor actual, posición 3 (16)
+(10:37:06) [PASO] Comparando posición 7 (38) con el menor actual, posición 3 (16)
+(10:37:06) [PASO] Comparando posición 8 (49) con el menor actual, posición 3 (16)
+(10:37:07) [INFO] Posición 3 quedó ordenada
+(10:37:07) [PASO] Comparando posición 5 (22) con el menor actual, posición 4 (19)
+(10:37:07) [PASO] Comparando posición 6 (23) con el menor actual, posición 4 (19)
+(10:37:07) [PASO] Comparando posición 7 (38) con el menor actual, posición 4 (19)
+(10:37:07) [PASO] Comparando posición 8 (49) con el menor actual, posición 4 (19)
+(10:37:07) [INFO] Posición 4 quedó ordenada
+(10:37:07) [PASO] Comparando posición 6 (23) con el menor actual, posición 5 (22)
+(10:37:08) [PASO] Comparando posición 7 (38) con el menor actual, posición 5 (22)
+(10:37:08) [PASO] Comparando posición 8 (49) con el menor actual, posición 5 (22)
+(10:37:08) [INFO] Posición 5 quedó ordenada
+(10:37:08) [PASO] Comparando posición 7 (38) con el menor actual, posición 6 (23)
+(10:37:08) [PASO] Comparando posición 8 (49) con el menor actual, posición 6 (23)
+(10:37:08) [INFO] Posición 6 quedó ordenada
+(10:37:08) [PASO] Comparando posición 8 (49) con el menor actual, posición 7 (38)
+(10:37:08) [INFO] Posición 7 quedó ordenada
+(10:37:09) [INFO] Ordenamiento por Selección finalizado
+(10:37:29) [INFO] Datos aleatorios generados (9 valores): [49, 34, 42, 45, 47, 12, 12, 14, 32]
+(10:37:29) [INFO] Datos aleatorios generados (9 valores): [41, 20, 27, 44, 33, 39, 14, 14, 39]
+(10:37:29) [INFO] Datos aleatorios generados (9 valores): [7, 9, 34, 34, 4, 47, 34, 14, 50]
+(10:39:18) [INFO] Datos aleatorios generados (9 valores): [6, 27, 18, 49, 3, 19, 45, 3, 21]
+(10:56:51) [INFO] Modo cambiado a Búsqueda
+(10:56:54) [INFO] Datos aleatorios generados (5 valores): [12, 4, 37, 4, 22]
+(10:56:59) [PASO] Ejecutando Búsqueda - Algoritmo: Secuencial - Velocidad: 1
+(11:38:51) [INFO] Modo cambiado a Búsqueda
+(11:38:52) [INFO] Datos aleatorios generados (5 valores): [42, 42, 25, 43, 28]
+(11:38:53) [INFO] Datos aleatorios generados (5 valores): [31, 49, 44, 27, 31]
+(11:38:54) [INFO] Datos manuales cargados (5 valores): [31, 49, 44, 27, 31]
+(11:38:55) [INFO] Datos aleatorios generados (5 valores): [29, 50, 24, 15, 23]
+(11:38:56) [PASO] Ejecutando Búsqueda - Algoritmo: Secuencial - Velocidad: 1
+
+(11:38:56) [INFO] Iniciando búsqueda por Secuencial
+(11:38:56) [INFO] No se ingresó un valor a buscar.
+(11:39:01) [INFO] Datos aleatorios generados (5 valores): [44, 46, 36, 4, 46]
+(11:39:02) [INFO] Datos aleatorios generados (5 valores): [27, 33, 5, 13, 29]
+(11:39:03) [INFO] Datos aleatorios generados (5 valores): [46, 31, 19, 18, 3]
+(11:39:08) [INFO] Datos aleatorios generados (5 valores): [15, 6, 10, 25, 24]
+(11:39:09) [INFO] Datos aleatorios generados (5 valores): [34, 28, 40, 7, 20]
+(11:39:19) [INFO] Datos aleatorios generados (5 valores): [5, 7, 49, 48, 14]
+(11:39:23) [INFO] Datos aleatorios generados (12 valores): [11, 30, 29, 21, 10, 25, 46, 37, 31, 13, 15, 28]
+(11:39:40) [INFO] Modo cambiado a Búsqueda
+(11:39:42) [INFO] Datos aleatorios generados (12 valores): [49, 45, 2, 25, 8, 32, 26, 48, 12, 18, 29, 25]
+(11:39:43) [INFO] Datos aleatorios generados (12 valores): [33, 46, 37, 12, 35, 47, 26, 49, 34, 3, 41, 36]
+(11:39:45) [INFO] Datos aleatorios generados (12 valores): [50, 27, 18, 23, 19, 29, 10, 16, 34, 17, 20, 24]
+(11:39:50) [PASO] Ejecutando Búsqueda - Algoritmo: Secuencial - Velocidad: 1
+
+(11:39:50) [INFO] Iniciando búsqueda por Secuencial
+(11:39:50) [PASO] Comparando índice 0 (50)
+(11:39:51) [INFO] Descartando índice 0
+(11:39:52) [PASO] Comparando índice 1 (27)
+(11:39:53) [INFO] Descartando índice 1
+(11:39:53) [PASO] Comparando índice 2 (18)
+(11:39:54) [INFO] Descartando índice 2
+(11:39:55) [PASO] Comparando índice 3 (23)
+(11:39:55) [INFO] Descartando índice 3
+(11:39:56) [PASO] Comparando índice 4 (19)
+(11:39:57) [INFO] Descartando índice 4
+(11:39:57) [PASO] Comparando índice 5 (29)
+(11:39:58) [INFO] Descartando índice 5
+(11:39:59) [PASO] Comparando índice 6 (10)
+(11:40:00) [INFO] Descartando índice 6
+(11:40:00) [PASO] Comparando índice 7 (16)
+(11:40:01) [INFO] Descartando índice 7
+(11:40:02) [PASO] Comparando índice 8 (34)
+(11:40:02) [INFO] Descartando índice 8
+(11:40:03) [PASO] Comparando índice 9 (17)
+(11:40:04) [INFO] Descartando índice 9
+(11:40:04) [PASO] Comparando índice 10 (20)
+(11:40:05) [PASO] Valor encontrado en índice 10
+(11:40:10) [INFO] Datos aleatorios generados (12 valores): [46, 10, 44, 34, 21, 8, 18, 39, 25, 44, 47, 24]
+(11:40:21) [INFO] Datos manuales cargados (12 valores): [46, 10, 44, 34, 21, 8, 18, 39, 25, 44, 47, 24]
+(11:40:23) [INFO] Datos aleatorios generados (12 valores): [41, 10, 24, 6, 49, 39, 12, 23, 40, 47, 33, 50]
+(11:40:31) [PASO] Ejecutando Búsqueda - Algoritmo: Binaria - Velocidad: 1
+
+(11:40:31) [INFO] Iniciando búsqueda por Binaria
+(11:40:32) [PASO] Comparando índice 5 (39)
+(11:40:32) [PASO] Comparando índice 2 (24)
+(11:40:33) [PASO] Comparando índice 0 (41)
+(11:40:34) [INFO] Valor no encontrado en el arreglo
+(11:40:41) [INFO] Modo cambiado a Ordenamiento
+(11:40:43) [PASO] Ejecutando Ordenamiento - Algoritmo: Selección - Velocidad: 1
+
+(11:40:43) [INFO] Iniciando ordenamiento por Selección
+(11:40:44) [PASO] Comparando posición 1 (10) con el menor actual, posición 0 (41)
+(11:40:45) [PASO] Comparando posición 2 (24) con el menor actual, posición 1 (10)
+(11:40:45) [PASO] Comparando posición 3 (6) con el menor actual, posición 1 (10)
+(11:40:46) [PASO] Comparando posición 4 (49) con el menor actual, posición 3 (6)
+(11:40:47) [PASO] Comparando posición 5 (39) con el menor actual, posición 3 (6)
+(11:40:47) [PASO] Comparando posición 6 (12) con el menor actual, posición 3 (6)
+(11:40:48) [PASO] Comparando posición 7 (23) con el menor actual, posición 3 (6)
+(11:40:49) [PASO] Comparando posición 8 (40) con el menor actual, posición 3 (6)
+(11:40:49) [PASO] Comparando posición 9 (47) con el menor actual, posición 3 (6)
+(11:40:50) [PASO] Comparando posición 10 (33) con el menor actual, posición 3 (6)
+(11:40:51) [PASO] Comparando posición 11 (50) con el menor actual, posición 3 (6)
+(11:40:52) [SWAP] Intercambiando posiciones 0 y 3
+(11:40:52) [INFO] Posición 0 quedó ordenada
+(11:40:53) [PASO] Comparando posición 2 (24) con el menor actual, posición 1 (10)
+(11:40:54) [PASO] Comparando posición 3 (41) con el menor actual, posición 1 (10)
+(11:40:54) [PASO] Comparando posición 4 (49) con el menor actual, posición 1 (10)
+(11:40:55) [PASO] Comparando posición 5 (39) con el menor actual, posición 1 (10)
+(11:40:56) [PASO] Comparando posición 6 (12) con el menor actual, posición 1 (10)
+(11:40:56) [PASO] Comparando posición 7 (23) con el menor actual, posición 1 (10)
+(11:40:57) [PASO] Comparando posición 8 (40) con el menor actual, posición 1 (10)
+(11:40:58) [PASO] Comparando posición 9 (47) con el menor actual, posición 1 (10)
+(11:40:59) [PASO] Comparando posición 10 (33) con el menor actual, posición 1 (10)
+(11:40:59) [PASO] Comparando posición 11 (50) con el menor actual, posición 1 (10)
+(11:41:00) [INFO] Posición 1 quedó ordenada
+(11:41:01) [PASO] Comparando posición 3 (41) con el menor actual, posición 2 (24)
+(11:41:01) [PASO] Comparando posición 4 (49) con el menor actual, posición 2 (24)
+(11:41:02) [PASO] Comparando posición 5 (39) con el menor actual, posición 2 (24)
+(11:41:03) [PASO] Comparando posición 6 (12) con el menor actual, posición 2 (24)
+(11:41:04) [PASO] Comparando posición 7 (23) con el menor actual, posición 6 (12)
+(11:41:04) [PASO] Comparando posición 8 (40) con el menor actual, posición 6 (12)
+(11:41:05) [PASO] Comparando posición 9 (47) con el menor actual, posición 6 (12)
+(11:41:06) [PASO] Comparando posición 10 (33) con el menor actual, posición 6 (12)
+(11:41:06) [PASO] Comparando posición 11 (50) con el menor actual, posición 6 (12)
+(11:41:07) [SWAP] Intercambiando posiciones 2 y 6
+(11:41:08) [INFO] Posición 2 quedó ordenada
+(11:41:09) [PASO] Comparando posición 4 (49) con el menor actual, posición 3 (41)
+(11:41:09) [PASO] Comparando posición 5 (39) con el menor actual, posición 3 (41)
+(11:41:10) [PASO] Comparando posición 6 (24) con el menor actual, posición 5 (39)
+(11:41:11) [PASO] Comparando posición 7 (23) con el menor actual, posición 6 (24)
+(11:41:11) [PASO] Comparando posición 8 (40) con el menor actual, posición 7 (23)
+(11:41:12) [PASO] Comparando posición 9 (47) con el menor actual, posición 7 (23)
+(11:41:13) [PASO] Comparando posición 10 (33) con el menor actual, posición 7 (23)
+(11:41:13) [PASO] Comparando posición 11 (50) con el menor actual, posición 7 (23)
+(11:41:14) [SWAP] Intercambiando posiciones 3 y 7
+(11:41:15) [INFO] Posición 3 quedó ordenada
+(11:41:16) [PASO] Comparando posición 5 (39) con el menor actual, posición 4 (49)
+(11:41:16) [PASO] Comparando posición 6 (24) con el menor actual, posición 5 (39)
+(11:41:17) [PASO] Comparando posición 7 (41) con el menor actual, posición 6 (24)
+(11:41:18) [PASO] Comparando posición 8 (40) con el menor actual, posición 6 (24)
+(11:41:18) [PASO] Comparando posición 9 (47) con el menor actual, posición 6 (24)
+(11:41:19) [PASO] Comparando posición 10 (33) con el menor actual, posición 6 (24)
+(11:41:20) [PASO] Comparando posición 11 (50) con el menor actual, posición 6 (24)
+(11:41:20) [SWAP] Intercambiando posiciones 4 y 6
+(11:41:21) [INFO] Posición 4 quedó ordenada
+(11:41:22) [PASO] Comparando posición 6 (49) con el menor actual, posición 5 (39)
+(11:41:23) [PASO] Comparando posición 7 (41) con el menor actual, posición 5 (39)
+(11:41:23) [PASO] Comparando posición 8 (40) con el menor actual, posición 5 (39)
+(11:41:24) [PASO] Comparando posición 9 (47) con el menor actual, posición 5 (39)
+(11:41:25) [PASO] Comparando posición 10 (33) con el menor actual, posición 5 (39)
+(11:41:25) [PASO] Comparando posición 11 (50) con el menor actual, posición 10 (33)
+(11:41:26) [SWAP] Intercambiando posiciones 5 y 10
+(11:41:27) [INFO] Posición 5 quedó ordenada
+(11:41:28) [PASO] Comparando posición 7 (41) con el menor actual, posición 6 (49)
+(11:41:28) [PASO] Comparando posición 8 (40) con el menor actual, posición 7 (41)
+(11:41:29) [PASO] Comparando posición 9 (47) con el menor actual, posición 8 (40)
+(11:41:30) [PASO] Comparando posición 10 (39) con el menor actual, posición 8 (40)
+(11:41:30) [PASO] Comparando posición 11 (50) con el menor actual, posición 10 (39)
+(11:41:31) [SWAP] Intercambiando posiciones 6 y 10
+(11:41:32) [INFO] Posición 6 quedó ordenada
+(11:41:32) [PASO] Comparando posición 8 (40) con el menor actual, posición 7 (41)
+(11:41:33) [PASO] Comparando posición 9 (47) con el menor actual, posición 8 (40)
+(11:41:34) [PASO] Comparando posición 10 (49) con el menor actual, posición 8 (40)
+(11:41:35) [PASO] Comparando posición 11 (50) con el menor actual, posición 8 (40)
+(11:41:35) [SWAP] Intercambiando posiciones 7 y 8
+(11:41:36) [INFO] Posición 7 quedó ordenada
+(11:41:37) [PASO] Comparando posición 9 (47) con el menor actual, posición 8 (41)
+(11:41:37) [PASO] Comparando posición 10 (49) con el menor actual, posición 8 (41)
+(11:41:38) [PASO] Comparando posición 11 (50) con el menor actual, posición 8 (41)
+(11:41:39) [INFO] Posición 8 quedó ordenada
+(11:41:40) [PASO] Comparando posición 10 (49) con el menor actual, posición 9 (47)
+(11:41:40) [PASO] Comparando posición 11 (50) con el menor actual, posición 9 (47)
+(11:41:41) [INFO] Posición 9 quedó ordenada
+(11:41:42) [PASO] Comparando posición 11 (50) con el menor actual, posición 10 (49)
+(11:41:42) [INFO] Posición 10 quedó ordenada
+(11:41:43) [INFO] Ordenamiento por Selección finalizado
+(11:44:03) [INFO] Modo cambiado a Búsqueda
+(11:44:10) [PASO] Ejecutando Búsqueda - Algoritmo: Secuencial - Velocidad: 1
+
+(11:44:10) [INFO] Iniciando búsqueda por Secuencial
+(11:44:10) [PASO] Comparando índice 0 (6)
+(11:44:11) [INFO] Descartando índice 0
+(11:44:12) [PASO] Comparando índice 1 (10)
+(11:44:13) [INFO] Descartando índice 1
+(11:44:13) [PASO] Comparando índice 2 (12)
+(11:44:14) [INFO] Descartando índice 2
+(11:44:15) [PASO] Comparando índice 3 (23)
+(11:44:15) [PASO] Valor encontrado en índice 3
+(11:44:19) [PASO] Ejecutando Búsqueda - Algoritmo: Binaria - Velocidad: 1
+
+(11:44:19) [INFO] Iniciando búsqueda por Binaria
+(11:44:20) [PASO] Comparando índice 5 (33)
+(11:44:20) [PASO] Comparando índice 2 (12)
+(11:44:21) [PASO] Comparando índice 3 (23)
+(11:44:22) [PASO] Valor encontrado en índice 3
+(11:46:59) [INFO] Modo cambiado a Búsqueda
+(11:47:01) [INFO] Datos aleatorios generados (5 valores): [46, 45, 32, 31, 40]
+(11:47:02) [INFO] Datos aleatorios generados (5 valores): [42, 41, 27, 11, 26]
+(11:47:03) [INFO] Datos aleatorios generados (5 valores): [17, 19, 28, 44, 9]
+(11:47:05) [INFO] Datos aleatorios generados (7 valores): [13, 49, 28, 15, 7, 48, 30]
+(11:47:08) [INFO] Datos aleatorios generados (11 valores): [43, 11, 31, 46, 6, 48, 42, 14, 11, 8, 10]
+(11:47:11) [INFO] Datos aleatorios generados (15 valores): [19, 9, 27, 3, 28, 38, 49, 33, 32, 45, 15, 4, 19, 13, 16]
+(11:47:13) [INFO] Datos aleatorios generados (17 valores): [41, 32, 30, 20, 39, 15, 9, 7, 39, 48, 29, 10, 6, 11, 37, 46, 33]
+(11:47:21) [PASO] Ejecutando Búsqueda - Algoritmo: Binaria - Velocidad: 1
+
+(11:47:21) [INFO] Iniciando búsqueda por Binaria
+(11:47:21) [INFO] Arreglo ordenado antes de ejecutar búsqueda binaria.
+(11:47:21) [PASO] Comparando índice 8 (30)
+(11:47:22) [PASO] Comparando índice 3 (10)
+(11:47:23) [PASO] Comparando índice 5 (15)
+(11:47:23) [PASO] Comparando índice 6 (20)
+(11:47:24) [PASO] Valor encontrado en índice 6
+(11:52:18) [INFO] Modo cambiado a Búsqueda
+(11:52:23) [INFO] Datos aleatorios generados (5 valores): [2, 30, 38, 47, 17]
+(11:52:28) [PASO] Ejecutando Búsqueda - Algoritmo: Binaria - Velocidad: 1
+
+(11:52:28) [INFO] Iniciando búsqueda por Binaria
+(11:52:28) [INFO] Arreglo ordenado antes de ejecutar búsqueda binaria.
+(11:52:28) [PASO] Comparando índice 2 (30)
+(11:52:29) [PASO] Comparando índice 0 (2)
+(11:52:30) [PASO] Valor encontrado en índice 0
+(11:52:35) [INFO] Datos manuales cargados (5 valores): [2, 30, 38, 47, 17]
+(11:52:36) [INFO] Datos aleatorios generados (5 valores): [13, 46, 48, 37, 31]
+(11:52:38) [PASO] Ejecutando Búsqueda - Algoritmo: Binaria - Velocidad: 1
+
+(11:52:38) [INFO] Iniciando búsqueda por Binaria
+(11:52:38) [INFO] Arreglo ordenado antes de ejecutar búsqueda binaria.
+(11:52:39) [PASO] Comparando índice 2 (37)
+(11:52:40) [PASO] Comparando índice 0 (13)
+(11:52:40) [INFO] Valor no encontrado en el arreglo
+(11:56:09) [INFO] Datos aleatorios generados (5 valores): [47, 15, 30, 35, 24]
+(11:56:09) [INFO] Datos aleatorios generados (5 valores): [8, 8, 9, 6, 13]
+(11:56:18) [INFO] Datos aleatorios generados (40 valores): [8, 20, 41, 6, 46, 39, 13, 38, 34, 26, 50, 41, 9, 16, 3, 10, 30, 12, 10, 35, 43, 43, 21, 21, 2, 9, 20, 49, 23, 10, 22, 4, 23, 10, 28, 2, 50, 39, 2, 39]
+(11:56:24) [PASO] Ejecutando Búsqueda - Algoritmo: Binaria - Velocidad: 3
+
+(11:56:24) [INFO] Iniciando búsqueda por Binaria
+(11:56:24) [INFO] Arreglo ordenado antes de ejecutar búsqueda binaria.
+(11:56:25) [PASO] Comparando índice 19 (21)
+(11:56:25) [PASO] Comparando índice 9 (10)
+(11:56:25) [PASO] Comparando índice 4 (4)
+(11:56:25) [PASO] Comparando índice 1 (2)
+(11:56:25) [PASO] Valor encontrado en índice 1
+(11:56:31) [PASO] Ejecutando Búsqueda - Algoritmo: Binaria - Velocidad: 1
+
+(11:56:31) [INFO] Iniciando búsqueda por Binaria
+(11:56:31) [INFO] Arreglo ordenado antes de ejecutar búsqueda binaria.
+(11:56:31) [PASO] Comparando índice 19 (21)
+(11:56:32) [PASO] Comparando índice 9 (10)
+(11:56:33) [PASO] Comparando índice 4 (4)
+(11:56:33) [PASO] Comparando índice 1 (2)
+(11:56:34) [PASO] Valor encontrado en índice 1

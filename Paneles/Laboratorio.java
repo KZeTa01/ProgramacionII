@@ -1,20 +1,5 @@
 package Paneles;
 
-<<<<<<< HEAD
-import javax.swing.*;
-
-import Excepciones.*;
-import Math.Ordenamientos;
-import Math.PasoOrdenamiento;
-import Math.TipoPaso;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
-import Paneles.SubPanelesLaboratorio.*;
-=======
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -22,6 +7,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -37,16 +24,22 @@ import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.Timer;
 
 import Excepciones.ValorExcedidoException;
+import Math.Busquedas;
+import Math.Ordenamientos;
+import Math.PasoBusqueda;
+import Math.PasoOrdenamiento;
+import Math.TipoPasoBusqueda;
+import Math.TipoPasoOrdenamiento;
 import Paneles.SubPanelesLaboratorio.PanelDatos;
 import Paneles.SubPanelesLaboratorio.PanelGrafico;
 import Paneles.SubPanelesLaboratorio.PanelRegistro;
->>>>>>> 088d08be67d31071c0511d9b1b495fff22c11d84
 import Paneles.SubPanelesLaboratorio.PanelRegistro.TipoRegistro;
 
 public class Laboratorio extends JPanel implements ActionListener {
-    JPanel pOpciones, pCentro, pInferior, pDatos, pGrafico, pCodigo, pBuscar,superior;
+    JPanel pCentro, pInferior, pCodigo, pBuscar,superior;
     PanelGrafico panelGrafico; PanelDatos panelDatos; PanelRegistro panelRegistro; 
     JButton btnEjecutar, btnAleatorio, btnManual;
     JSlider sdrVelocidad;
@@ -60,8 +53,7 @@ public class Laboratorio extends JPanel implements ActionListener {
     final String [] algoritmosBusqueda = {"Secuencial", "Binaria"};
 
     JSpinner spCantidad;
-    javax.swing.Timer timerAnimacion;
-
+    private javax.swing.Timer timerAnimacion;
     public Laboratorio() {
         configurarPestaña();
         cargarComponentesLab();
@@ -168,11 +160,13 @@ public class Laboratorio extends JPanel implements ActionListener {
         if (e.getSource()== rbOrdenamiento) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosOrdenamiento));
             txtBusqueda.setEnabled(false);
+            panelGrafico.mostrarModo("ORDENAMIENTO");
             panelRegistro.agregarRegistro("Modo cambiado a Ordenamiento", TipoRegistro.INFO);
 
         } else if (e.getSource() == rbBusqueda) {
             combo.setModel(new DefaultComboBoxModel<>(algoritmosBusqueda));
             txtBusqueda.setEnabled(true);
+            panelGrafico.mostrarModo("BUSQUEDA");
             panelRegistro.agregarRegistro("Modo cambiado a Búsqueda", TipoRegistro.INFO);
 
         } else if (e.getSource() == btnAleatorio){
@@ -180,6 +174,7 @@ public class Laboratorio extends JPanel implements ActionListener {
             cantidadBarras = (int) spCantidad.getValue();
             panelDatos.marcarError(false);
             a= panelGrafico.generarDatosAleatorio(cantidadBarras);
+            panelGrafico.mostrarModo(rbBusqueda.isSelected() ? "BUSQUEDA" : "ORDENAMIENTO");
             panelDatos.desactivar(a); //rr
             panelRegistro.agregarRegistro(
                     "Datos aleatorios generados (" + cantidadBarras + " valores): " + Arrays.toString(a),
@@ -214,6 +209,7 @@ public class Laboratorio extends JPanel implements ActionListener {
                 cantidadBarras = datosManual.length;
                 panelDatos.marcarError(false);
                 panelGrafico.setDatos(datosManual);
+                panelGrafico.mostrarModo(rbBusqueda.isSelected() ? "BUSQUEDA" : "ORDENAMIENTO");
 
                 panelRegistro.agregarRegistro(
                         "Datos manuales cargados (" + cantidadBarras + " valores): " + Arrays.toString(datosManual),
@@ -229,9 +225,6 @@ public class Laboratorio extends JPanel implements ActionListener {
                         "Error en los datos", JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource() == btnEjecutar){
-
-            ejecutarAnimacion();
-
             int[] datosActuales = panelGrafico.getDatos();
             if (datosActuales == null || datosActuales.length == 0) {
                 panelRegistro.agregarRegistro(
@@ -243,24 +236,27 @@ public class Laboratorio extends JPanel implements ActionListener {
             }
 
             String algoritmo = (String) combo.getSelectedItem();
-            String modo = rbOrdenamiento.isSelected() ? "Ordenamiento" : "Búsqueda";
+            boolean esOrdenamiento = rbOrdenamiento.isSelected();
+            String modo = esOrdenamiento ? "Ordenamiento" : "Búsqueda";
 
             panelRegistro.agregarRegistro(
                     "Ejecutando " + modo + " - Algoritmo: " + algoritmo
                             + " - Velocidad: " + sdrVelocidad.getValue(),
                     TipoRegistro.PASO);
 
-            // TODO: aquí se debe invocar la lógica real del algoritmo seleccionado
+            if (esOrdenamiento) {
+                ejecutarAnimacion(datosActuales, algoritmo, true);
+            } else {
+                ejecutarAnimacion(datosActuales, algoritmo, false);
+            }
         }
     }
 
-
-        private void ejecutarAnimacion() {
+    private void ejecutarAnimacion(int[] datosActuales, String algoritmo, boolean esOrdenamiento) {
         if (timerAnimacion != null && timerAnimacion.isRunning()) {
             return; // ya hay una animación en curso
         }
 
-        int[] datosActuales = panelGrafico.getDatos();
         if (datosActuales == null || datosActuales.length == 0) {
             JOptionPane.showMessageDialog(this,
                     "Primero genere datos con 'Aleatorio' o 'Manual'.",
@@ -268,32 +264,10 @@ public class Laboratorio extends JPanel implements ActionListener {
             return;
         }
 
-        if (!rbOrdenamiento.isSelected()) {
-            JOptionPane.showMessageDialog(this,
-                    "La animación de búsqueda aún no está implementada.",
-                    "Próximamente", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        String algoritmo = (String) combo.getSelectedItem();
-        List<PasoOrdenamiento> pasos;
-        switch (algoritmo) {
-            case "Selección":
-                pasos = Ordenamientos.seleccion(datosActuales);
-                break;
-            case "Inserción":
-                pasos = Ordenamientos.insercion(datosActuales);
-                break;
-            case "Burbuja":
-                pasos = Ordenamientos.burbuja(datosActuales);
-                break;
-            default:
-                return;
-        }
-
         panelRegistro.limpiarRegistro();
         panelRegistro.agregarSeparadorEjecucion();
-        panelRegistro.agregarRegistro("Iniciando ordenamiento por " + algoritmo, PanelRegistro.TipoRegistro.INFO);
+        panelRegistro.agregarRegistro("Iniciando " + (esOrdenamiento ? "ordenamiento" : "búsqueda")
+                + " por " + algoritmo, PanelRegistro.TipoRegistro.INFO);
         habilitarControles(false);
 
         int velocidad = sdrVelocidad.getValue();
@@ -306,22 +280,112 @@ public class Laboratorio extends JPanel implements ActionListener {
             retraso = 130;
         }
 
-        Iterator<PasoOrdenamiento> iterador = pasos.iterator();
-        timerAnimacion = new Timer(retraso, null);
-        timerAnimacion.addActionListener(ev -> {
-            if (!iterador.hasNext()) {
-                timerAnimacion.stop();
+        if (esOrdenamiento) {
+            panelGrafico.mostrarModo("ORDENAMIENTO");
+            List<PasoOrdenamiento> pasos;
+            switch (algoritmo) {
+                case "Selección":
+                    pasos = Ordenamientos.seleccion(datosActuales);
+                    break;
+                case "Inserción":
+                    pasos = Ordenamientos.insercion(datosActuales);
+                    break;
+                case "Burbuja":
+                    pasos = Ordenamientos.burbuja(datosActuales);
+                    break;
+                default:
+                    habilitarControles(true);
+                    return;
+            }
+
+            Iterator<PasoOrdenamiento> iterador = pasos.iterator();
+            timerAnimacion = new Timer(retraso, null);
+            timerAnimacion.addActionListener(ev -> {
+                if (!iterador.hasNext()) {
+                    timerAnimacion.stop();
+                    habilitarControles(true);
+                    return;
+                }
+                PasoOrdenamiento paso = iterador.next();
+                panelGrafico.aplicarPaso(paso);
+                panelRegistro.agregarRegistro(paso.getMensaje(), mapearTipoRegistro(paso.getTipo()));
+            });
+            timerAnimacion.start();
+
+        } else {
+            panelGrafico.mostrarModo("BUSQUEDA");
+
+            int objetivo;
+            String textoBusqueda = txtBusqueda.getText().trim();
+            if (textoBusqueda.isEmpty()) {
+                panelRegistro.agregarRegistro("No se ingresó un valor a buscar.", TipoRegistro.INFO);
+                JOptionPane.showMessageDialog(this,
+                        "Ingrese un valor entero a buscar en el campo correspondiente.",
+                        "Búsqueda vacía", JOptionPane.WARNING_MESSAGE);
                 habilitarControles(true);
                 return;
             }
-            PasoOrdenamiento paso = iterador.next();
-            panelGrafico.aplicarPaso(paso);
-            panelRegistro.agregarRegistro(paso.getMensaje(), mapearTipoRegistro(paso.getTipo()));
-        });
-        timerAnimacion.start();
+            try {
+                objetivo = Integer.parseInt(textoBusqueda);
+            } catch (NumberFormatException ex) {
+                panelRegistro.agregarRegistro("Valor de búsqueda inválido: " + textoBusqueda, TipoRegistro.INFO);
+                JOptionPane.showMessageDialog(this,
+                        "Ingrese un valor numérico válido para la búsqueda.",
+                        "Valor inválido", JOptionPane.ERROR_MESSAGE);
+                habilitarControles(true);
+                return;
+            }
+
+            List<PasoBusqueda> pasos;
+            if ("Binaria".equals(algoritmo)) {
+                int[] datosOrdenados = datosActuales.clone();
+                Arrays.sort(datosOrdenados);
+                datosActuales = datosOrdenados;
+                panelGrafico.setDatos(datosActuales);
+                panelRegistro.agregarRegistro("Arreglo ordenado antes de ejecutar búsqueda binaria.", TipoRegistro.INFO);
+            }
+            switch (algoritmo) {
+                case "Secuencial":
+                    pasos = Busquedas.busquedaSecuencial(datosActuales, objetivo);
+                    break;
+                case "Binaria":
+                    pasos = Busquedas.busquedaBinaria(datosActuales, objetivo);
+                    break;
+                default:
+                    habilitarControles(true);
+                    return;
+            }
+
+            Iterator<PasoBusqueda> iterador = pasos.iterator();
+            timerAnimacion = new Timer(retraso, null);
+            timerAnimacion.addActionListener(ev -> {
+                if (!iterador.hasNext()) {
+                    timerAnimacion.stop();
+                    habilitarControles(true);
+                    return;
+                }
+                PasoBusqueda paso = iterador.next();
+                panelGrafico.getPanelCajas().setPasoActual(paso);
+                panelRegistro.agregarRegistro(mensajePasoBusqueda(paso), mapearTipoRegistroBusqueda(paso.getTipoPaso()));
+            });
+            timerAnimacion.start();
+        }
     }
 
-    private PanelRegistro.TipoRegistro mapearTipoRegistro(TipoPaso tipo) {
+    private PanelRegistro.TipoRegistro mapearTipoRegistroBusqueda(TipoPasoBusqueda tipo) {
+        switch (tipo) {
+            case COMPARANDO:
+            case ENCONTRADO:
+                return PanelRegistro.TipoRegistro.PASO;
+            case DESCARTADO:
+            case NO_ENCONTRADO:
+            case RANGO_ACTUAL:
+            default:
+                return PanelRegistro.TipoRegistro.INFO;
+        }
+    }
+
+    private PanelRegistro.TipoRegistro mapearTipoRegistro(TipoPasoOrdenamiento tipo) {
         switch (tipo) {
             case INTERCAMBIO:
                 return PanelRegistro.TipoRegistro.SWAP;
@@ -329,6 +393,23 @@ public class Laboratorio extends JPanel implements ActionListener {
                 return PanelRegistro.TipoRegistro.PASO;
             default:
                 return PanelRegistro.TipoRegistro.INFO;
+        }
+    }
+
+    private String mensajePasoBusqueda(PasoBusqueda paso) {
+        switch (paso.getTipoPaso()) {
+            case COMPARANDO:
+                return "Comparando índice " + paso.getIndiceActual() + " (" + paso.getArreglo()[paso.getIndiceActual()] + ")";
+            case ENCONTRADO:
+                return "Valor encontrado en índice " + paso.getIndiceActual();
+            case DESCARTADO:
+                return "Descartando índice " + paso.getIndiceActual();
+            case NO_ENCONTRADO:
+                return "Valor no encontrado en el arreglo";
+            case RANGO_ACTUAL:
+                return "Rango actual [" + paso.getIndiceIzq() + ", " + paso.getIndiceDer() + "]";
+            default:
+                return "Paso de búsqueda: " + paso.getTipoPaso();
         }
     }
 

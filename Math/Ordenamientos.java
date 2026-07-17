@@ -20,7 +20,7 @@ public class Ordenamientos {
 
             for (int j = i + 1; j < n; j++) {
                 pasos.add(new PasoOrdenamiento(arr.clone(), indiceMinimo, j, ordenados.clone(),
-                        TipoPaso.COMPARANDO,
+                        TipoPasoOrdenamiento.COMPARANDO,
                         "Comparando posición " + j + " (" + arr[j] + ") con el menor actual, posición "
                                 + indiceMinimo + " (" + arr[indiceMinimo] + ")"));
 
@@ -34,18 +34,18 @@ public class Ordenamientos {
                 arr[i] = arr[indiceMinimo];
                 arr[indiceMinimo] = tmp;
                 pasos.add(new PasoOrdenamiento(arr.clone(), i, indiceMinimo, ordenados.clone(),
-                        TipoPaso.INTERCAMBIO,
+                        TipoPasoOrdenamiento.INTERCAMBIO,
                         "Intercambiando posiciones " + i + " y " + indiceMinimo));
             }
 
             ordenados[i] = true;
             pasos.add(new PasoOrdenamiento(arr.clone(), i, -1, ordenados.clone(),
-                    TipoPaso.ORDENADO, "Posición " + i + " quedó ordenada"));
+                    TipoPasoOrdenamiento.ORDENADO, "Posición " + i + " quedó ordenada"));
         }
 
         ordenados[n - 1] = true;
         pasos.add(new PasoOrdenamiento(arr.clone(), -1, -1, ordenados.clone(),
-                TipoPaso.FINALIZADO, "Ordenamiento por Selección finalizado"));
+                TipoPasoOrdenamiento.FINALIZADO, "Ordenamiento por Selección finalizado"));
         return pasos;
     }
 
@@ -67,17 +67,17 @@ public class Ordenamientos {
             int j = i - 1;
 
             pasos.add(new PasoOrdenamiento(arr.clone(), i, -1, ordenados.clone(),
-                    TipoPaso.COMPARANDO,
+                    TipoPasoOrdenamiento.COMPARANDO,
                     "Tomando el elemento en posición " + i + " (" + actual + ") para insertarlo"));
 
             while (j >= 0 && arr[j] > actual) {
                 pasos.add(new PasoOrdenamiento(arr.clone(), j, j + 1, ordenados.clone(),
-                        TipoPaso.COMPARANDO,
+                        TipoPasoOrdenamiento.COMPARANDO,
                         "Comparando " + arr[j] + " (posición " + j + ") con " + actual));
 
                 arr[j + 1] = arr[j];
                 pasos.add(new PasoOrdenamiento(arr.clone(), j, j + 1, ordenados.clone(),
-                        TipoPaso.INTERCAMBIO,
+                        TipoPasoOrdenamiento.INTERCAMBIO,
                         "Desplazando " + arr[j] + " una posición a la derecha"));
                 j--;
             }
@@ -85,11 +85,11 @@ public class Ordenamientos {
             arr[j + 1] = actual;
             ordenados[i] = true;
             pasos.add(new PasoOrdenamiento(arr.clone(), j + 1, -1, ordenados.clone(),
-                    TipoPaso.ORDENADO, "Insertando " + actual + " en la posición " + (j + 1)));
+                    TipoPasoOrdenamiento.ORDENADO, "Insertando " + actual + " en la posición " + (j + 1)));
         }
 
         pasos.add(new PasoOrdenamiento(arr.clone(), -1, -1, ordenados.clone(),
-                TipoPaso.FINALIZADO, "Ordenamiento por Inserción finalizado"));
+                TipoPasoOrdenamiento.FINALIZADO, "Ordenamiento por Inserción finalizado"));
         return pasos;
     }
 
@@ -108,7 +108,7 @@ public class Ordenamientos {
 
             for (int j = 0; j < n - i - 1; j++) {
                 pasos.add(new PasoOrdenamiento(arr.clone(), j, j + 1, ordenados.clone(),
-                        TipoPaso.COMPARANDO,
+                        TipoPasoOrdenamiento.COMPARANDO,
                         "Comparando posiciones " + j + " (" + arr[j] + ") y " + (j + 1) + " (" + arr[j + 1] + ")"));
 
                 if (arr[j] > arr[j + 1]) {
@@ -117,14 +117,14 @@ public class Ordenamientos {
                     arr[j + 1] = tmp;
                     huboIntercambio = true;
                     pasos.add(new PasoOrdenamiento(arr.clone(), j, j + 1, ordenados.clone(),
-                            TipoPaso.INTERCAMBIO,
+                            TipoPasoOrdenamiento.INTERCAMBIO,
                             "Intercambiando posiciones " + j + " y " + (j + 1)));
                 }
             }
 
             ordenados[n - i - 1] = true;
             pasos.add(new PasoOrdenamiento(arr.clone(), n - i - 1, -1, ordenados.clone(),
-                    TipoPaso.ORDENADO, "Posición " + (n - i - 1) + " quedó ordenada"));
+                    TipoPasoOrdenamiento.ORDENADO, "Posición " + (n - i - 1) + " quedó ordenada"));
 
             if (!huboIntercambio) {
                 break;
@@ -135,7 +135,7 @@ public class Ordenamientos {
             ordenados[i] = true;
         }
         pasos.add(new PasoOrdenamiento(arr.clone(), -1, -1, ordenados.clone(),
-                TipoPaso.FINALIZADO, "Ordenamiento Burbuja finalizado"));
+                TipoPasoOrdenamiento.FINALIZADO, "Ordenamiento Burbuja finalizado"));
         return pasos;
     }
 }

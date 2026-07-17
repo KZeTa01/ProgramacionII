@@ -11,18 +11,29 @@ public class PanelGrafico extends JPanel {
     private final PanelBarras panelBarras;
     private final JScrollPane scrollPane;
 
+
     public PanelGrafico() {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Panel de visualización"));
 
+        
         panelBarras = new PanelBarras();
+        cardLayout = new CardLayout();
+        panelContenedor = new JPanel(cardLayout); 
+        panelCajas = new PanelCajas();
+    
+        panelContenedor.add(panelBarras, "ORDENAMIENTO");
+        panelContenedor.add(panelCajas, "BUSQUEDA");
 
-        scrollPane = new JScrollPane(panelBarras);
+        scrollPane = new JScrollPane(panelContenedor);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.getViewport().setBackground(Color.WHITE);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
+        add(scrollPane, BorderLayout.CENTER);
+        
+        setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
     }
 
@@ -36,6 +47,7 @@ public class PanelGrafico extends JPanel {
             datos[i] = (int) (Math.random() * 49) + 2; // rango [2, 50]
         }
         actualizarGrafico();
+        panelCajas.setDatos(datos);
         return datos;
     }
 
@@ -50,6 +62,7 @@ public class PanelGrafico extends JPanel {
     public void setDatos(int[] datos) {
         this.datos = datos;
         actualizarGrafico();
+        panelCajas.setDatos(datos);
     }
 
     // Notifica al panel de dibujo que los datos cambiaron para que se vuelva a pintar
@@ -69,4 +82,18 @@ public class PanelGrafico extends JPanel {
      * en el ancho visible, aparezca una barra de desplazamiento horizontal
      * en vez de comprimir (y deformar) las barras.
      */
+
+
+    private CardLayout cardLayout;
+    private PanelCajas panelCajas;
+    private JPanel panelContenedor; // Usa CardLayout
+
+    public void mostrarModo(String modo) {
+        cardLayout.show(panelContenedor, modo);
+    }
+
+    public PanelBarras getPanelBarras() { return panelBarras; }
+
+    public PanelCajas getPanelCajas() { return panelCajas; }
+
 }

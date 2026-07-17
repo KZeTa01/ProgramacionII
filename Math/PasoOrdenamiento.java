@@ -13,11 +13,11 @@ public class PasoOrdenamiento {
     private final int idx1;           // primer índice resaltado (-1 si no aplica)
     private final int idx2;           // segundo índice resaltado (-1 si no aplica)
     private final boolean[] ordenados; // posiciones ya definitivas hasta este paso
-    private final TipoPaso tipo;
+    private final TipoPasoOrdenamiento tipo;
     private final String mensaje;
 
     public PasoOrdenamiento(int[] arreglo, int idx1, int idx2, boolean[] ordenados,
-                             TipoPaso tipo, String mensaje) {
+                             TipoPasoOrdenamiento tipo, String mensaje) {
         this.arreglo = arreglo;
         this.idx1 = idx1;
         this.idx2 = idx2;
@@ -42,7 +42,7 @@ public class PasoOrdenamiento {
         return ordenados;
     }
 
-    public TipoPaso getTipo() {
+    public TipoPasoOrdenamiento getTipo() {
         return tipo;
     }
 

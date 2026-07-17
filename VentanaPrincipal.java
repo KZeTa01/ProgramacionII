@@ -17,7 +17,7 @@ public class VentanaPrincipal extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         laboratorio = new Laboratorio();
-        interativo = new Interativo();
+        interativo = new interactivo();
         registro = new Registro();
     }
 

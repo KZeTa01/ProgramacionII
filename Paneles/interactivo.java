@@ -7,23 +7,23 @@ import java.awt.event.*;
 import java.awt.geom.*;
 import java.util.ArrayList;
 import java.util.List;
- 
+
 public class interactivo extends JPanel {
- 
+
     private JPanel panelBanco;      // Caja pequeña con las figuras disponibles
     private JPanel panelDestino;    // Caja grande donde se colocan las figuras
     private JLabel estadoLabel;     // Muestra cuántas figuras se han colocado
     private static final int TOTAL_FIGURAS = 5;
- 
+
     public interactivo() {
         configurarPanel();
         cargarFigurasIniciales();
     }
- 
+
     public void configurarPanel() {
         setLayout(new BorderLayout());
         setBackground(new Color(235, 238, 245));
- 
+
         // ===== Encabezado con degradado =====
         JPanel encabezado = new JPanel(new BorderLayout()) {
             @Override
@@ -38,35 +38,35 @@ public class interactivo extends JPanel {
         };
         encabezado.setPreferredSize(new Dimension(0, 70));
         encabezado.setBorder(new EmptyBorder(10, 20, 10, 20));
- 
+
         JLabel titulo = new JLabel("Panel Interactivo de Figuras");
         titulo.setFont(new Font("SansSerif", Font.BOLD, 22));
         titulo.setForeground(Color.WHITE);
- 
+
         JLabel subtitulo = new JLabel("Arrastra cada figura al área de trabajo · doble clic para devolverla");
         subtitulo.setFont(new Font("SansSerif", Font.PLAIN, 12));
         subtitulo.setForeground(new Color(230, 230, 250));
- 
+
         JPanel textos = new JPanel();
         textos.setOpaque(false);
         textos.setLayout(new BoxLayout(textos, BoxLayout.Y_AXIS));
         textos.add(titulo);
         textos.add(subtitulo);
         encabezado.add(textos, BorderLayout.WEST);
- 
+
         JButton botonReiniciar = crearBotonReiniciar();
         JPanel wrapperBoton = new JPanel(new GridBagLayout());
         wrapperBoton.setOpaque(false);
         wrapperBoton.add(botonReiniciar);
         encabezado.add(wrapperBoton, BorderLayout.EAST);
- 
+
         add(encabezado, BorderLayout.NORTH);
- 
+
         // ===== Panel central: banco + destino =====
         JPanel centro = new JPanel(new BorderLayout());
         centro.setOpaque(false);
         centro.setBorder(new EmptyBorder(15, 15, 15, 15));
- 
+
         // ===== Caja de figuras (banco) =====
         panelBanco = new JPanel();
         panelBanco.setLayout(new FlowLayout(FlowLayout.LEFT, 15, 15));
@@ -77,9 +77,9 @@ public class interactivo extends JPanel {
                 new EmptyBorder(5, 5, 5, 5)));
         panelBanco.setPreferredSize(new Dimension(0, 160));
         panelBanco.setBackground(new Color(248, 248, 252));
- 
+
         centro.add(panelBanco, BorderLayout.NORTH);
- 
+
         // ===== Caja de destino (área de trabajo) =====
         panelDestino = new JPanel(null) {
             @Override
@@ -113,10 +113,10 @@ public class interactivo extends JPanel {
                 reacomodarEnLimites();
             }
         });
- 
+
         centro.add(panelDestino, BorderLayout.CENTER);
         add(centro, BorderLayout.CENTER);
- 
+
         // ===== Barra de estado =====
         JPanel barraEstado = new JPanel(new BorderLayout());
         barraEstado.setBackground(new Color(245, 246, 250));
@@ -126,10 +126,10 @@ public class interactivo extends JPanel {
         estadoLabel.setForeground(new Color(90, 90, 110));
         barraEstado.add(estadoLabel, BorderLayout.WEST);
         add(barraEstado, BorderLayout.SOUTH);
- 
+
         actualizarEstado();
     }
- 
+
     private JButton crearBotonReiniciar() {
         JButton boton = new JButton("🔄 Reiniciar");
         boton.setFocusPainted(false);
@@ -151,7 +151,7 @@ public class interactivo extends JPanel {
         boton.addActionListener(e -> reiniciarTodo());
         return boton;
     }
- 
+
     // Crea algunas figuras de ejemplo dentro del banco, cada una con una forma distinta
     private void cargarFigurasIniciales() {
         Color[] colores = {
@@ -169,13 +169,13 @@ public class interactivo extends JPanel {
         panelBanco.revalidate();
         panelBanco.repaint();
     }
- 
+
     private void actualizarEstado() {
         int colocadas = panelDestino.getComponentCount();
         estadoLabel.setText("Figuras colocadas: " + colocadas + " / " + TOTAL_FIGURAS
                 + (colocadas == TOTAL_FIGURAS ? "   ✅ ¡Completado!" : ""));
     }
- 
+
     private void reiniciarTodo() {
         List<Component> actuales = new ArrayList<>();
         for (Component c : panelDestino.getComponents()) {
@@ -191,7 +191,7 @@ public class interactivo extends JPanel {
         panelDestino.repaint();
         actualizarEstado();
     }
- 
+
     // Reacomoda las figuras dentro de los nuevos límites cuando la ventana cambia de tamaño
     private void reacomodarEnLimites() {
         for (Component c : panelDestino.getComponents()) {
@@ -202,9 +202,9 @@ public class interactivo extends JPanel {
         }
         panelDestino.repaint();
     }
- 
+
     private enum TipoForma { CIRCULO, CUADRADO, TRIANGULO, ESTRELLA, HEXAGONO }
- 
+
     // ==========================================================
     // Clase interna: representa una figura arrastrable y personalizada
     // ==========================================================
@@ -218,7 +218,7 @@ public class interactivo extends JPanel {
         private boolean arrastrando = false;
         private float pulso = 0f; // 0 = sin pulso, 1 = pulso máximo (animación de aterrizaje)
         private Timer timerPulso;
- 
+
         public Figura(Color color, String texto, TipoForma tipoForma) {
             this.colorBase = color;
             this.texto = texto;
@@ -226,22 +226,22 @@ public class interactivo extends JPanel {
             setPreferredSize(new Dimension(80, 100));
             setSize(80, 100);
             setCursor(new Cursor(Cursor.HAND_CURSOR));
- 
+
             MouseAdapter listenerArrastre = crearListenerArrastre();
             addMouseListener(listenerArrastre);
             addMouseMotionListener(listenerArrastre);
         }
- 
+
         private MouseAdapter crearListenerArrastre() {
             return new MouseAdapter() {
- 
+
                 @Override
                 public void mousePressed(MouseEvent e) {
                     offset = e.getPoint();
                     arrastrando = true;
                     repaint();
                 }
- 
+
                 @Override
                 public void mouseReleased(MouseEvent e) {
                     arrastrando = false;
@@ -252,19 +252,19 @@ public class interactivo extends JPanel {
                     }
                     repaint();
                 }
- 
+
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     hover = true;
                     repaint();
                 }
- 
+
                 @Override
                 public void mouseExited(MouseEvent e) {
                     hover = false;
                     repaint();
                 }
- 
+
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if (e.getClickCount() == 2 && getParent() == panelDestino) {
@@ -277,12 +277,12 @@ public class interactivo extends JPanel {
                         actualizarEstado();
                     }
                 }
- 
+
                 @Override
                 public void mouseDragged(MouseEvent e) {
                     Point puntoEnDestino = SwingUtilities.convertPoint(
                             Figura.this, e.getPoint(), panelDestino);
- 
+
                     if (getParent() != panelDestino) {
                         reubicarEnDestino(puntoEnDestino);
                     } else {
@@ -297,7 +297,7 @@ public class interactivo extends JPanel {
                 }
             };
         }
- 
+
         private void iniciarPulso() {
             if (timerPulso != null && timerPulso.isRunning()) {
                 timerPulso.stop();
@@ -314,42 +314,42 @@ public class interactivo extends JPanel {
             });
             timerPulso.start();
         }
- 
+
         private void reubicarEnDestino(Point puntoEnDestino) {
             panelBanco.remove(Figura.this);
             panelBanco.revalidate();
             panelBanco.repaint();
- 
+
             panelDestino.add(Figura.this);
- 
+
             // Aparece pegada al mouse; recién se acomoda en la línea base al soltar.
             Point libre = limitarLibre(
                     puntoEnDestino.x - offset.x,
                     puntoEnDestino.y - offset.y);
             setLocation(libre.x, libre.y);
             ultimaX = libre.x;
- 
+
             panelDestino.revalidate();
             panelDestino.repaint();
         }
- 
+
         // Deja que la figura se mueva libremente (X e Y) dentro de los límites del área de trabajo
         private Point limitarLibre(int x, int y) {
             int maxX = Math.max(panelDestino.getWidth() - getWidth(), 0);
             int maxY = Math.max(panelDestino.getHeight() - getHeight(), 0);
- 
+
             int nX = Math.max(0, Math.min(x, maxX));
             int nY = Math.max(0, Math.min(y, maxY));
- 
+
             return new Point(nX, nY);
         }
- 
+
         // Al soltar el mouse, la figura "cae" hacia la línea base del área de trabajo,
         // esquivando otras figuras si hace falta.
         private void aterrizarEnLineaBase() {
             int lineaBase = Math.max(panelDestino.getHeight() - getHeight(), 0);
             int x = getX();
- 
+
             if (sobrePosicion(x, lineaBase)) {
                 Point libre = buscarPosicionLibre(lineaBase);
                 x = libre.x;
@@ -357,13 +357,13 @@ public class interactivo extends JPanel {
             setLocation(x, lineaBase);
             ultimaX = x;
         }
- 
+
         private boolean sobrePosicion(int x, int y) {
             Rectangle propuesto = new Rectangle(x, y, getWidth(), getHeight());
- 
+
             for (Component comp : panelDestino.getComponents()) {
                 if (comp == Figura.this) continue;
- 
+
                 Rectangle otro = comp.getBounds();
                 if (propuesto.intersects(otro)) {
                     return true;
@@ -371,11 +371,11 @@ public class interactivo extends JPanel {
             }
             return false;
         }
- 
+
         private Point buscarPosicionLibre(int y) {
             int maxX = panelDestino.getWidth() - getWidth();
             maxX = Math.max(maxX, 0);
- 
+
             for (int x = 0; x <= maxX; x += 5) {
                 if (!sobrePosicion(x, y)) {
                     return new Point(x, y);
@@ -383,28 +383,28 @@ public class interactivo extends JPanel {
             }
             return new Point(0, y);
         }
- 
+
         // ===== Dibujo personalizado de la figura =====
         @Override
         protected void paintComponent(Graphics g) {
             Graphics2D g2 = (Graphics2D) g.create();
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
- 
+
             int w = getWidth();
             int h = getHeight();
             int formaAncho = w - 20;
             int formaAlto = h - 30;
             int offX = 10;
             int offY = 5;
- 
+
             Shape forma = crearForma(tipoForma, offX, offY, formaAncho, formaAlto);
- 
+
             // Sombra (más grande si se está arrastrando, simulando elevación)
             int sombraOffset = arrastrando ? 8 : 3;
             g2.setColor(new Color(0, 0, 0, arrastrando ? 60 : 35));
             AffineTransform sombraT = AffineTransform.getTranslateInstance(sombraOffset, sombraOffset);
             g2.fill(sombraT.createTransformedShape(forma));
- 
+
             // Anillo de pulso al aterrizar
             if (pulso > 0f) {
                 g2.setColor(new Color(colorBase.getRed(), colorBase.getGreen(), colorBase.getBlue(),
@@ -416,24 +416,24 @@ public class interactivo extends JPanel {
                         .createTransformedShape(forma);
                 g2.draw(anillo);
             }
- 
+
             // Relleno con degradado
             Color claro = colorBase.brighter();
             Color oscuro = colorBase.darker();
             GradientPaint gp = new GradientPaint(offX, offY, claro, offX + formaAncho, offY + formaAlto, oscuro);
             g2.setPaint(gp);
- 
+
             float alpha = arrastrando ? 0.75f : 1f;
             Composite compositeOriginal = g2.getComposite();
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
             g2.fill(forma);
- 
+
             // Borde (más grueso al pasar el mouse)
             g2.setColor(hover ? Color.WHITE : new Color(60, 60, 70));
             g2.setStroke(new BasicStroke(hover ? 3f : 1.5f));
             g2.draw(forma);
             g2.setComposite(compositeOriginal);
- 
+
             // Texto centrado
             g2.setFont(new Font("SansSerif", Font.BOLD, 14));
             g2.setColor(Color.WHITE);
@@ -441,10 +441,10 @@ public class interactivo extends JPanel {
             int tx = w / 2 - fm.stringWidth(texto) / 2;
             int ty = offY + formaAlto / 2 + fm.getAscent() / 2 - 2;
             g2.drawString(texto, tx, ty);
- 
+
             g2.dispose();
         }
- 
+
         private Shape crearForma(TipoForma tipo, int x, int y, int w, int h) {
             switch (tipo) {
                 case CIRCULO:

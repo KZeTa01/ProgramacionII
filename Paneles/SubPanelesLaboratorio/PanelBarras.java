@@ -3,7 +3,7 @@ package Paneles.SubPanelesLaboratorio;
 import java.awt.*;
 import javax.swing.*;
 
-import Math.TipoPaso;
+import Math.TipoPasoOrdenamiento;
 
 public class PanelBarras extends JPanel implements Scrollable {
     // Valor de referencia usado para escalar la altura de las barras (rango de datos: 2 a 50)
@@ -26,7 +26,7 @@ public class PanelBarras extends JPanel implements Scrollable {
     private int idxDestacado1 = -1;
     private int idxDestacado2 = -1;
     private boolean[] ordenados = new boolean[0];
-    private TipoPaso tipoActual = null;
+    private TipoPasoOrdenamiento tipoActual = null;
 
     public PanelBarras() {
         setBackground(Color.WHITE);
@@ -50,7 +50,7 @@ public class PanelBarras extends JPanel implements Scrollable {
         repaint();
     }
 
-    public void aplicarPaso(int[] arreglo, int idx1, int idx2, boolean[] ordenados, TipoPaso tipo) {
+    public void aplicarPaso(int[] arreglo, int idx1, int idx2, boolean[] ordenados, TipoPasoOrdenamiento tipo) {
         this.valores = (arreglo != null) ? arreglo : new int[0];
         this.idxDestacado1 = idx1;
         this.idxDestacado2 = idx2;
@@ -94,12 +94,12 @@ public class PanelBarras extends JPanel implements Scrollable {
 
     // Determina el color de la barra en la posición idx según el estado actual
     private Color colorParaBarra(int idx) {
-        if (tipoActual == TipoPaso.FINALIZADO) {
+        if (tipoActual == TipoPasoOrdenamiento.FINALIZADO) {
             return COLOR_ORDENADO;
         }
 
         if (idx == idxDestacado1 || idx == idxDestacado2) {
-            return (tipoActual == TipoPaso.INTERCAMBIO) ? COLOR_INTERCAMBIO : COLOR_COMPARANDO;
+            return (tipoActual == TipoPasoOrdenamiento.INTERCAMBIO) ? COLOR_INTERCAMBIO : COLOR_COMPARANDO;
         }
 
         if (ordenados != null && idx < ordenados.length && ordenados[idx]) {
